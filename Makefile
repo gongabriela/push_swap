@@ -6,7 +6,7 @@
 #    By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 10:14:30 by ggoncalv          #+#    #+#              #
-#    Updated: 2025/01/24 10:31:27 by ggoncalv         ###   ########.fr        #
+#    Updated: 2025/01/25 14:55:58 by ggoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,16 +15,16 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c
+SRC =
+
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
-
+#linkar os objs do push_swap com o .a do libft e criar o ./push_swap (?)
 $(NAME): $(OBJ)
-	$(MAKE) -C ./Libft
-	$(CC) $(CFLAGS) $(OBJ) ./Libft/libft.a -o $(NAME)
+	ar rc $(NAME) $(OBJ)
+
 clean:
-	$(MAKE) -C ./Libft/libft.a fclean
 	rm -rf $(OBJ)
 
 fclean: clean

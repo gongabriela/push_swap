@@ -6,7 +6,15 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:40:17 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/01/24 12:22:11 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:01:12 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
+//funcao de erro
+void	ft_error()
+{
+	ft_putendl_fd("Error", 2);
+	exit(0);
+}
