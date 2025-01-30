@@ -5,98 +5,122 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 10:37:25 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/01/25 17:29:02 by ggoncalv         ###   ########.fr       */
+/*   Created: 2025/01/30 17:22:40 by ggoncalv          #+#    #+#             */
+/*   Updated: 2025/01/30 17:38:51 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//funcao de verificar argumento
-int	ft_check_arg(char **args)
+char	**ft_divide_argv(int argc, char **argv)
 {
-	//if (args == NULL)
+	char	**char_args;
 
-	//if (nao for numero)
-		//return(free(args), ft_error());
-	//while(verificar se tem numero repetido)
-
-}
-//funcao de dar free
-void	ft_free() //fazer variadica para conseguir dar free em quantos precisar?
-{
-
-}
-//funcao de inicializar a lista
-void	ft_init_stack(t_list **stack_a, char **args)
-{
-	char	*temp;
-	int 	i;
-	int 	v;
-
-	i = 0;
-	while (args[i])
-	{
-		temp = ft_lstnew(ft_atoi(args[i]));
-		v = ft_check_arg(temp);
-		if (v > 0)
-		{
-			ft_lstclear(stack_a, ft_lstdelone);
-			ft_error();
-		}
-		ft_lstadd_back(stack_a, temp);
-		free(temp);
-		i++;
-	}
-}
-//funcao de criar a lista
-	//while (argc > 0)
-	//{
-		//verificar se o arg e valido.
-			//se sim, adiciona node com funcao do libft
-			//se nao, retorna funcao de erro
-		//agrc--;
-    //}
-
-//funcao de verificar se ja esta na ordem
-
-//funcao de dar free
-
-int	main(int argc, char **argv)
-{
-	t_list	**stack_a;
-	t_list	**stack_b;
-	int	**args;
-	int	i;
-
-	i = 0;
-	if (argc > 2)
+	if (argc < 2)
 		ft_error();
 	if (argc == 2)
-		args = ft_split(argv[1], ' ');
+	{
+		char_args = ft_split(argv, ' ');
+		if (char_args == NULL)
+			ft_error();
+	}
 	else
-	args = malloc((argc + 1) * sizeof(int));
-		while(argc > 0)
-		{
-			args[i] = argv[i + 1];
-			i++;
+		char_args = argv;
+	return(char_args);
+}
+//funcao para verificar se os args sao ints
+int	*ft_check_args(char **char_args)
+{
+	int	nbr;
+	int	i;
+	int	j;
+
+	i = 1;
+	while (char_args[i])
+	{
+		j = 0;
+		if (char_args[i][j] == '-')
+			j++;
+		while (char_args[i][j])
+		{	if (!ft_isdigit(char_args[i][j]))
+				return(free(char_args), ft_error(), NULL);
+			j++;
 		}
-	ft_check_arg(args);
-	ft_init_stack(stack_a, args);
-	//verificar se argumentos sao validos
-		//argumentos nao sao integers, sao maiores que um integer, sao duplicados
+		nbr = ft_atol(char_args[i]);
+		if (nbr > -2147483648 && nbr < 2147483647)
+			i++;
+		else
+			return(free(char_args), ft_error(), NULL);
+	}
+	return (i);
+}
+//funcao para transformar os args em ints
+int	*ft_char_to_int(char **char_args, int i) //i = args_size
+{
+	int	*int_args;
 
-	//criar stack a e stack b com a lista linkada
+	int_args = ft_calloc(i, sizeof(int));
+	if (int_args == NULL)
+		return (free(char_args), ft_error(), NULL);
+	i = 0;
+	while(char_args[i + 1])
+	{
+		int_args[i] = ft_atol(char_args[i + 1]);
+		i++;
+	}
+	return(free(char_args), int_args);
+}
 
-	//verificar se a lista ja esta organizada:
+//funcao para inicializar a stack_a
+void	*ft_init_stack(int *int_args, int	size, t_list **stack_a)
+{
+	t_list	*new;
+	void	*bottom_a_pointer;
+	int		i;
 
-	//organizar argv e encontrar a mediana
+	i = 0;
+	while(size > i)
+	{
+		new = ft_lstnew(int_args[i]);
+		if (new == NULL)
+			return(free(int_args), ft_free_lst(stack_a), NULL); //achar funcao de dar free na list, acho que tem no libft
+		if (i == size - 1)
+			bottom_a_pointer = new;
+		ft_lstadd_back(stack_a, new);
+		i++;
+	}
+	return(bottom_a_pointer);
+}
+//funcao para encontrar a mediana
+int	ft_find_median(int *int_args, int args_size)
+{
+	//utilizar o quicksort
+	int	median;
 
-	//se numero de elementos for <= 5, usa um algoritmo;
-
-	//se for mais que 5, utiliza o outro algoritmo.
-
-	//dar free nas stacks
-
-	//return ????;
+	return(free(int_args), median);
+}
+int	main(int argc, char **argv)
+{
+	//devo usar o read para receber os argumentos????????? nao sei fazer isso socorro
+	char	**char_args;
+	int		*int_args;
+	int		args_size;
+	t_list	*stack_a; //nao lembro se e * ou ** ou se depende de como vc ta modificando? verificar dps
+	void	*bottom_a_pointer; //int mesmo ou void ou t_list? nao sei.
+	int		median;
+	//funcao que separa os args e guarda num array de char
+	char_args = ft_divide_argv(argc, argv);
+	//funcao que verifica se os elementos do array de char sao validos para se tranformar em int, e retorna a qtd de args
+	args_size = ft_check_args(char_args);
+	//funcao que cria o array de int
+	int_args = ft_char_to_int(char_args, args_size);
+	//funcao que cria a stack a
+	bottom_a_pointer = ft_init_stack(int_args, args_size, &stack_a); //ver forma correta de passar a stack como parametro
+	//funcao que encontra a mediana
+	median = ft_find_median(int_args, args_size);
+	if (args_size <= 5)
+		ft_small_algorithm(stack_a, median); //novamente, ver a maneira correta de passar o ponteiro da stack...
+	else
+		ft_algorithm(stack_a, median);
+	return (0);
 }
