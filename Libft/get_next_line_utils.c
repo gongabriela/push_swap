@@ -6,13 +6,13 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 11:18:58 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/01/25 14:40:12 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:47:42 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*gnl_ft_strjoin(char *buffer, char *temp)
+char	*gnl_ft_strjoin(char *buffer, char *temp)
 {
 	char	*conc;
 	int		i;

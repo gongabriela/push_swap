@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:22:40 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/01/30 17:38:51 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:10:28 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,31 @@
 char	**ft_divide_argv(int argc, char **argv)
 {
 	char	**char_args;
+	int		i;
 
+	i = 0;
 	if (argc < 2)
 		ft_error();
 	if (argc == 2)
 	{
-		char_args = ft_split(argv, ' ');
+		char_args = ft_split(argv[1], ' ');
 		if (char_args == NULL)
 			ft_error();
 	}
 	else
-		char_args = argv;
+	{
+		char_args = ft_calloc(argc, sizeof(char));
+		if (char_args == NULL)
+			ft_error();
+		while (i < argc)
+		{
+			char_args[i] = argv[i + 1];
+		}
+	}
 	return(char_args);
 }
 //funcao para verificar se os args sao ints
-int	*ft_check_args(char **char_args)
+int	ft_check_args(char **char_args)
 {
 	int	nbr;
 	int	i;
@@ -43,14 +53,14 @@ int	*ft_check_args(char **char_args)
 			j++;
 		while (char_args[i][j])
 		{	if (!ft_isdigit(char_args[i][j]))
-				return(free(char_args), ft_error(), NULL);
+				return(free(char_args), ft_error(), -1);
 			j++;
 		}
 		nbr = ft_atol(char_args[i]);
 		if (nbr > -2147483648 && nbr < 2147483647)
 			i++;
 		else
-			return(free(char_args), ft_error(), NULL);
+			return(free(char_args), ft_error(), -1);
 	}
 	return (i);
 }
@@ -70,7 +80,11 @@ int	*ft_char_to_int(char **char_args, int i) //i = args_size
 	}
 	return(free(char_args), int_args);
 }
-
+void del(void *content)
+{
+    // If the content is a dynamically allocated integer, free it
+    free(content);
+}
 //funcao para inicializar a stack_a
 void	*ft_init_stack(int *int_args, int	size, t_list **stack_a)
 {
