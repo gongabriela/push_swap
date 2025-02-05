@@ -32,6 +32,20 @@ long			ft_atol(const char *str)
 		nbr = (str[i++] - '0') * sign + nbr * 10;
 	return (nbr);
 }
+void	ft_free_char_args(char **char_args)
+{
+	int	i;
+
+	if (!char_args)
+		return ;
+	i = 0;
+	while (char_args[i])
+	{
+		free(char_args[i]);
+		i++;
+	}
+	free(char_args);
+}
 
 char	**ft_divide_argv(int argc, char **argv)
 {
@@ -74,18 +88,40 @@ int	ft_check_args(char **char_args)
 			j++;
 		while (char_args[i][j])
 		{	if (!ft_isdigit(char_args[i][j]))
-				return(free(char_args), ft_error(), -1);
+				return(ft_free_char_args(char_args), ft_error(), -1);
 			j++;
 		}
 		if (ft_strlen(char_args[i]) > 10)
-			return(free(char_args), ft_error(), -1);
+			return(ft_free_char_args(char_args), ft_error(), -1);
 		nbr = ft_atol(char_args[i]);
 		if (nbr > -2147483648 && nbr < 2147483647) // > ou >=?
 			i++;
 		else
-			return(free(char_args), ft_error(), -1);
+			return(ft_free_char_args(char_args), ft_error(), -1);
 	}
 	return (i);
+}
+int	ft_check_duplicates(int	*int_args, int size)
+{
+	int	nbr;
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < size)
+	{
+		nbr = int_args[j];
+		i = 0;
+		while (i < size)
+		{
+			if (nbr == int_args[i])
+				return(-1); //retornar -1 ou 0? acho q e 0
+			else
+				i++;
+		}
+		j++;
+	}
+	return(1);
 }
 int	*ft_char_to_int(char **char_args, int i) //i = args_size
 {
@@ -93,50 +129,121 @@ int	*ft_char_to_int(char **char_args, int i) //i = args_size
 
 	int_args = ft_calloc(i, sizeof(int));
 	if (int_args == NULL)
-		return (free(char_args), ft_error(), NULL);
+		return (ft_free_char_args(char_args), ft_error(), NULL); //nao e free(char_args), tem q ser outra coisa
 	i = 0;
 	while(char_args[i])
 	{
 		int_args[i] = ft_atol(char_args[i]);
 		i++;
 	}
+	/*if (ft_check_duplicates(int_args, i))
+		return(free(int_args), free(char_args), ft_error(), NULL);*/ //novamente nao e free(char_args)
 	return(int_args);
 }
 
+t_list	*ft_new_node(int	number)
+{
+	t_list	*node;
+
+	node = (t_list *)malloc(sizeof(t_list));
+	if (node == NULL)
+		return (NULL);
+	node->number = number;
+	node->next = NULL;
+	return (node);
+}
 void ft_lstprint(t_list *head)
 {
 	int	value;
+
 	while (head != NULL)
 	{
-		value = *(int *)(head->content);
+		value = head->number;
         ft_printf("%d ", value);
         head = head->next;
     }
 }
-void del(void *content)
+void	ft_free_lst(t_list **head)
 {
-    // If the content is a dynamically allocated integer, free it
-    free(content);
-}
+	t_list	*node;
+	t_list	*temp;
 
-void	*ft_init_stack(int *int_args, int	size, t_list **stack_a)
+	if (*head == NULL)
+		return ;
+	node = *head;
+	while (node != NULL)
+	{
+		temp = node->next;
+		free(node);
+		node = temp;
+	}
+	*head = NULL;
+}
+void	ft_init_stack(t_list **stack_a, t_list **tail, int *int_args, int size)
 {
-	t_list	*new;
-	void	*bottom_a_pointer;
+	t_list	*new_node;
 	int		i;
 
 	i = 0;
-	while(size > i)
+	while (i < size)
 	{
-		new = ft_lstnew(&int_args[i]);
-		if (new == NULL)
-			return(free(int_args), ft_lstclear(stack_a, del), NULL); //achar funcao de dar free na list, acho que tem no libft
-		if (i == size - 1)
-			bottom_a_pointer = new;
-		ft_lstadd_back(stack_a, new); //talvez fazer o seu proprio?
+		new_node = ft_new_node(int_args[i]);
+		if (new_node == NULL)
+		{
+			//ft_free_lst(*stack_a); //nao sei passar essa porra
+			free(int_args); //o chat fala que nao da free mas da sim ne?
+			ft_error();
+		}
+		if (*stack_a == NULL)
+			*stack_a = new_node;
+		else
+			(*tail)->next = new_node;
+		*tail = new_node;
 		i++;
 	}
-	return(bottom_a_pointer);
+}
+int	ft_check_if_sorted(int *int_args, int args_size)
+{
+	int	i;
+	int	sorted;
+
+	i = 0;
+	sorted = 0;
+	while (i < args_size - 1)
+	{
+		if (int_args[i] > int_args[i + 1])
+		{
+			sorted = 1;
+			break;
+		}
+		i++;
+	}
+	return(sorted);
+}
+int	ft_find_median(int *int_args, int args_size)
+{
+	int	i;
+	int	temp;
+	int	median_index;
+
+	while (ft_check_if_sorted(int_args, args_size))
+	{
+		i = 0;
+		while (i < args_size - 1) //pq tem que ser args_size - 1? por causa do int_args[i + 1]!
+		{
+			if (int_args[i] > int_args[i + 1])
+			{
+				temp = int_args[i];
+				int_args[i] = int_args[i + 1];
+				int_args[i + 1] = temp;
+			}
+			i++;
+		}
+	}
+	median_index = args_size / 2;
+	if (args_size % 2 == 1)
+		return (int_args[median_index]);
+	return (int_args[median_index - 1]);
 }
 int	main(int argc, char **argv)
 {
@@ -144,11 +251,12 @@ int	main(int argc, char **argv)
 	int		*int_args;
 	int		args_size;
 	int		i;
-	t_list	*stack_a;
-	void	*bottom_a_pointer;
-	void	*head;
+	t_list	*stack_a; //cabeca da lista stack_a
+	t_list	*tail;
+	int		median;
 
 	i = 0;
+	//dividir args na char_args
 	char_args = ft_divide_argv(argc, argv);
 	ft_printf("args being stored in char_args: ");
 	while (char_args[i] != NULL)
@@ -157,9 +265,11 @@ int	main(int argc, char **argv)
 		i++;
 	}
 
+	//verificar se os args sao validos (falta verificar args repetidos)
 	args_size = ft_check_args(char_args);
 	ft_printf("\nresult of args_size: %d\n", args_size);
 
+	//passar os args de char pra int e dar free no char_args
 	int_args = ft_char_to_int(char_args, args_size);
 	ft_printf("int_args: ");
 	i = 0;
@@ -168,26 +278,30 @@ int	main(int argc, char **argv)
 		ft_printf("%d ", int_args[i]);
 		i++;
 	}
+	ft_free_char_args(char_args);
 
+	//check if it is sorted
+	if (!ft_check_if_sorted(int_args, args_size))
+		free(int_args), ft_error();
+
+	//criar a stack_a
+	stack_a = NULL;
+	ft_init_stack(&stack_a, &tail, int_args, args_size);
+	ft_printf("\nElements of the linked list: ");
+	ft_lstprint(stack_a);
+	ft_free_lst(&stack_a);
+
+	//encontrar a mediana e dar free no int_args
+	median = ft_find_median(int_args, args_size);
+	ft_printf("\nSorted int_args: ");
 	i = 0;
 	while (i < args_size)
 	{
-		free(char_args[i]);
+		ft_printf("%d ", int_args[i]);
 		i++;
 	}
-	free(char_args);
+	free(int_args);
+	ft_printf("\nmedian: %d\n", median);
 
-	 stack_a = NULL;
-	bottom_a_pointer = ft_init_stack(int_args, args_size, &stack_a);
-	//ft_printf("Last number: %d", int_args[i - 1]); //printar ultimo arg
-	//printar stack
-	head = stack_a;
-	ft_printf("Elements of the linked list: ");
-	ft_lstprint(head);
-	ft_lstclear(&stack_a, del);
-	//printar pointer e ver se ta igual ultimo arg
-
-	free(int_args); //aqui deve dar double free porque a lista vai apontar
-					//para a array, ela nao vai copiar o valor!
 	return (0);
 }

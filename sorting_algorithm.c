@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:51:02 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/01/24 12:22:10 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:29:16 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,17 @@ e preciso de 3 ponteiros em cada stack;
 
 se tiver que fazer sa ou sb, verificar se beneficiaria um ss. mesma coisa com rr e rrr
 se nao tiver o numero valido entre os dois primeiros ou os dois ultimos, tem que ver o que faz menos movimento, rra ou ra*/
+
+#include "push_swap.h"
+
+char	**small_sorting(t_list **head_a, t_list **tail_a)
+{
+	t_list	*stack_b;
+
+	stack_b = NULL;
+}
+
+char	**big_sorting(t_list **head_a, t_list **tail_a)
+{
+
+}
