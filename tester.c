@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	ft_error()
+/*void	ft_error()
 {
 	ft_putendl_fd("Error", 2);
 	exit(0);
@@ -137,7 +137,7 @@ int	*ft_char_to_int(char **char_args, int i) //i = args_size
 		i++;
 	}
 	/*if (ft_check_duplicates(int_args, i))
-		return(free(int_args), free(char_args), ft_error(), NULL);*/ //novamente nao e free(char_args)
+		return(free(int_args), free(char_args), ft_error(), NULL); //novamente nao e free(char_args)
 	return(int_args);
 }
 
@@ -304,4 +304,79 @@ int	main(int argc, char **argv)
 	ft_printf("\nmedian: %d\n", median);
 
 	return (0);
-}
+}*/
+
+//movements tester
+/*#include "push_swap.h"
+
+int	main(void)
+{
+	t_list	*head;
+	t_list	*node1;
+	t_list	*node2;
+	t_list	*node3;
+	t_list	*node4;
+
+	t_list	*head_b;
+	t_list	*node1_b;
+	t_list	*node2_b;
+	t_list	*node3_b;
+	t_list	*node4_b;
+
+	head = NULL;
+	node1 = ft_new_node(1);
+	head = node1;
+	node2 = ft_new_node(2);
+	node1->next = node2;
+	node3 = ft_new_node(3);
+	node2->next = node3;
+	node4 = ft_new_node(4);
+	node3->next = node4;
+	ft_lstprint(head);
+	ft_printf("\n");
+
+	head_b = NULL;
+	node1_b = ft_new_node(10);
+	head_b = node1_b;
+	node2_b = ft_new_node(20);
+	node1_b->next = node2_b;
+	node3_b = ft_new_node(30);
+	node2_b->next = node3_b;
+	node4_b = ft_new_node(40);
+	node3_b->next = node4_b;
+	ft_lstprint(head_b);
+
+	//stack is sorted
+	if (ft_is_stack_sorted(head))
+		ft_printf("The list is sorted!\n");
+	else
+		ft_printf("The list is not sorted!\n");
+
+	//ft_sa_sb
+	ft_printf("performing sa in this list:\n");
+	ft_sa_sb(&head);
+	ft_lstprint(head);
+
+	//ft_pa_pb
+	ft_printf("\nperforming pa in this list: \n");
+	ft_pa_pb(&head, &head_b);
+	ft_lstprint(head);
+	ft_printf("\n");
+	ft_lstprint(head_b);
+
+	ft_printf("\n\nperforming pb in this list: \n");
+	ft_pa_pb(&head_b, &head);
+	ft_lstprint(head);
+	ft_printf("\n");
+	ft_lstprint(head_b);
+
+	//ft_ra_rb
+	ft_printf("\nperforming the ra movement:\n");
+	ft_ra_rb(&head, 0, "r");
+	ft_lstprint(head);
+	ft_printf("\n");
+	ft_lstprint(head_b);
+	ft_printf("\n");
+
+	return (0);
+}*/

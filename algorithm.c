@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting_algorithm.c                                :+:      :+:    :+:   */
+/*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:51:02 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/05 14:29:16 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:49:15 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,58 @@ char	**small_sorting(t_list **head_a, t_list **tail_a)
 
 	stack_b = NULL;
 }
+int	ft_is_stack_sorted(t_list *stack)
+{
+	t_list	*temp;
+	t_list	*next;
 
-char	**big_sorting(t_list **head_a, t_list **tail_a)
+	temp = stack;
+	while (temp->next != NULL)
+	{
+		next = temp->next;
+		if (temp->number > next->number)
+			return (0);
+		temp = next;
+	}
+	return (1);
+}
+void	ft_pass_to_pb(t_list **head_a, t_list **head_b)
+{
+	t_list	*stack_a;
+	int		top_a;
+
+	stack_a = *head_a;
+	top_a = stack_a->number;
+
+
+}
+
+void	ft_sort_pb(t_list **head_b)
+{
+	//depois de receber um numero da stack_a, verificar a posicao coreta dele
+}
+void	ft_sort_3_numbers(t_list **stack_a)
 {
 
+}
+void	ft_from_b_to_a(t_list **head_a, t_list **head_b)
+{
+
+}
+char	**big_sorting(t_list **head_a, t_list **tail_a)
+{
+	t_list	*head_b;
+
+	head_b = NULL;
+	//passar um numero para a stack_b para ter um ponteiro para o tail_b (?)
+	while(ft_is_stack_sorted(head_a))
+	{
+		while (ft_lstsize(head_a) != 3)
+		{
+			ft_pass_to_b(&head_a, &head_b);
+			ft_sort_b(&head_b);
+		}
+		ft_sort_3_numbers(&head_a);
+		ft_from_b_to_a(&head_a, &head_b); //fazer uma funcao de um movimento so? p usar essa funcao outras vezes. aqui a gnt escreve um while
+	}
 }

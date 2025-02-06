@@ -6,12 +6,119 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:22:40 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/05 12:54:28 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:22:13 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int		ft_isspace(int c)
+{
+	if (c == ' ' || c == '\t' || c == '\n' ||
+		c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
+}
+
+long			ft_atol(const char *str)
+{
+	long		nbr;
+	int			sign;
+	size_t		i;
+
+	nbr = 0;
+	sign = 1;
+	i = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			sign = -1;
+	while (str[i] >= '0' && str[i] <= '9')
+		nbr = (str[i++] - '0') * sign + nbr * 10;
+	return (nbr);
+}
+void	ft_free_char_args(char **char_args)
+{
+	int	i;
+
+	if (!char_args)
+		return ;
+	i = 0;
+	while (char_args[i])
+	{
+		free(char_args[i]);
+		i++;
+	}
+	free(char_args);
+}
+int	ft_check_args(char **char_args)
+{
+	int	nbr;
+	int	i;
+	int	j;
+
+	i = 0;
+	while (char_args[i])
+	{
+		j = 0;
+		if (char_args[i][j] == '-')
+			j++;
+		while (char_args[i][j])
+		{	if (!ft_isdigit(char_args[i][j]))
+				return(ft_free_char_args(char_args), ft_error(), -1);
+			j++;
+		}
+		if (ft_strlen(char_args[i]) > 10)
+			return(ft_free_char_args(char_args), ft_error(), -1);
+		nbr = ft_atol(char_args[i]);
+		if (nbr > -2147483648 && nbr < 2147483647) // > ou >=?
+			i++;
+		else
+			return(ft_free_char_args(char_args), ft_error(), -1);
+	}
+	return (i);
+}
+int	ft_check_duplicates(int	*int_args, int size)
+{
+	int	nbr;
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < size)
+	{
+		nbr = int_args[j];
+		i = 0;
+		while (i < size)
+		{
+			if (nbr == int_args[i])
+				return(-1); //retornar -1 ou 0? acho q e 0
+			else
+				i++;
+		}
+		j++;
+	}
+	return(1);
+}
+int	ft_check_if_sorted(int *int_args, int args_size)
+{
+	int	i;
+	int	sorted;
+
+	i = 0;
+	sorted = 0;
+	while (i < args_size - 1)
+	{
+		if (int_args[i] > int_args[i + 1])
+		{
+			sorted = 1;
+			break;
+		}
+		i++;
+	}
+	return(sorted);
+}
 char	**ft_divide_argv(int argc, char **argv)
 {
 	char	**char_args;

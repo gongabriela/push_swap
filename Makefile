@@ -6,7 +6,7 @@
 #    By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/24 10:14:30 by ggoncalv          #+#    #+#              #
-#    Updated: 2025/02/03 10:22:41 by ggoncalv         ###   ########.fr        #
+#    Updated: 2025/02/06 15:26:08 by ggoncalv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = tester.c
+SRC = utils.c movements.c algorithm.c main.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -29,7 +29,8 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -g $(OBJ) $(LIBFT) -o $(NAME)
 
 debug:
-	cc -g tester.c ./Libft/libft.a -o push_swap
+	make -C ./Libft
+	cc -g utils.c movements.c algorithm.c main.c ./Libft/libft.a -o push_swap
 clean:
 	make -C ./Libft fclean
 	rm -rf $(OBJ)

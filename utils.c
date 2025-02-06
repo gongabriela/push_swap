@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:40:17 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/05 12:53:07 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:13:21 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,53 @@ void	ft_error()
 	ft_putendl_fd("Error", 2);
 	exit(0);
 }
-int		ft_isspace(int c)
+t_list	*ft_new_node(int	number)
 {
-	if (c == ' ' || c == '\t' || c == '\n' ||
-		c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
+	t_list	*node;
 
-long			ft_atol(const char *str)
+	node = (t_list *)malloc(sizeof(t_list));
+	if (node == NULL)
+		return (NULL);
+	node->number = number;
+	node->next = NULL;
+	return (node);
+}
+void ft_lstprint(t_list *head)
 {
-	long		nbr;
-	int			sign;
-	size_t		i;
+	int	value;
 
-	nbr = 0;
-	sign = 1;
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-		if (str[i++] == '-')
-			sign = -1;
-	while (str[i] >= '0' && str[i] <= '9')
-		nbr = (str[i++] - '0') * sign + nbr * 10;
-	return (nbr);
+	while (head != NULL)
+	{
+		value = head->number;
+        ft_printf("%d ", value);
+        head = head->next;
+    }
 }
-void	ft_free_char_args(char **char_args)
+void	ft_free_lst(t_list **head)
+{
+	t_list	*node;
+	t_list	*temp;
+
+	if (*head == NULL)
+		return ;
+	node = *head;
+	while (node != NULL)
+	{
+		temp = node->next;
+		free(node);
+		node = temp;
+	}
+	*head = NULL;
+}
+int	ft_lstsize(t_list *head) //igual lstsize da libft
 {
 	int	i;
 
-	if (!char_args)
-		return ;
 	i = 0;
-	while (char_args[i])
+	while(head != NULL)
 	{
-		free(char_args[i]);
+		head = head->next;
 		i++;
 	}
-	free(char_args);
+	return (i);
 }
