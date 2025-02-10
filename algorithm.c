@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:51:02 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/06 16:49:15 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:29:31 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,43 +64,119 @@ int	ft_is_stack_sorted(t_list *stack)
 	}
 	return (1);
 }
-void	ft_pass_to_pb(t_list **head_a, t_list **head_b)
+int	ft_get_median(t_list *head_a)
 {
-	t_list	*stack_a;
-	int		top_a;
+	int	*args;
+	int	size;
+	int	i;
+	int	temp;
 
-	stack_a = *head_a;
-	top_a = stack_a->number;
-
-
+	size = ft_lstsize(head_a);
+	args  = ft_calloc(size, sizeof(int));
+	i = 0;
+	while (i < size)
+	{
+		args[i] = head_a->number;
+		head_a = head_a->next;
+		i++;
+	}
+	i = 0;
+	while (ft_check_if_sorted(args, size))
+	{
+		i = 0;
+		while (i < size - 1) //pq tem que ser args_size - 1? por causa do int_args[i + 1]!
+		{
+			if (args[i] > args[i + 1])
+			{
+				temp = args[i];
+				args[i] = args[i + 1];
+				args[i + 1] = temp;
+			}
+			i++;
+		}
+	}
+	i = size / 2;
+	if (size % 2 == 1)
+		return (args[i]);
+	return (free(args), args[i - 1]);
 }
-
-void	ft_sort_pb(t_list **head_b)
+void	ft_from_a_to_b(t_list **head_a, t_list **head_b, int median)
 {
-	//depois de receber um numero da stack_a, verificar a posicao coreta dele
+	int		nbr_a;
+
+	while ()
+	{
+		nbr_a = (*head_a)->number;
+		if(nbr_a <= median)
+		{
+			ft_pa_pb(&head_a, &head_b, 1); //eu acho que a funcao tem que ser *** porque eu ja to passando pra essa funcao como **
+			break ;
+		}
+		else
+			ft_ra_rb(&head_a, 0);
+	}
+}
+void	ft_sort_b(t_list **head_b)
+{
+	t_list	*top;
+	t_list	*current;
+	t_list	*bestie;
+
+	top = *head_b;
+	current = (*head_b)->next;
+	bestie = (*head_b)->next;
+	while (current != NULL)
+	{
+		if (top->number < current->number)
+		{
+			if (bestie->number > current->number)
+				bestie = current;
+			current = current->next;
+		}
+	}
+	while (bestie->next != top)
+	{
+		//se o top esta embaixo do bestie
+		//se o bestie na no bottom
+		//se o bestie ta no bottom2
+	}
+	 //os numeros aqui tem que estar do maior para o menor
+	//diminuir o numero do topo por todos os numeros da b para encontrar o seu "melhor amigo": ele tem que ser maior que o numero do topo, mas com a menor diferenca possivel
+	//colocar o numero do topo diretamente embaixo desse melhor amigo!
 }
 void	ft_sort_3_numbers(t_list **stack_a)
 {
 
 }
-void	ft_from_b_to_a(t_list **head_a, t_list **head_b)
+
+void	ft_from_b_to_a(t_list **stack_a, t_list **stack_b)
 {
 
 }
-char	**big_sorting(t_list **head_a, t_list **tail_a)
+void	big_sorting(t_list **head_a, t_list **tail_a)
 {
 	t_list	*head_b;
-
+	int		median;
 	head_b = NULL;
 	//passar um numero para a stack_b para ter um ponteiro para o tail_b (?)
 	while(ft_is_stack_sorted(head_a))
 	{
-		while (ft_lstsize(head_a) != 3)
-		{
-			ft_pass_to_b(&head_a, &head_b);
-			ft_sort_b(&head_b);
-		}
-		ft_sort_3_numbers(&head_a);
-		ft_from_b_to_a(&head_a, &head_b); //fazer uma funcao de um movimento so? p usar essa funcao outras vezes. aqui a gnt escreve um while
+		median = ft_get_median(head_a); //pegar a mediana. funcao esta muito grande!
+		ft_from_a_to_b(&head_a, &head_b, median); //achar o melhor numero da a e passar pra b
+		ft_sort_b(&head_b); //organizar a lista b depois de passar um novo numero
+		if (ft_lstsize(head_a) == 3)
+			ft_sort_3_numbers(&head_a);
 	}
+	ft_from_b_to_a(&head_a, &head_b); //pass all numbers from b to a. here all elements in a are sorted already.
+	//checar mais uma vez se a stack_a esta organizada
+	free(head_b); //nao sei se ta certo aqui.
+	//dar free na stack_a tambem?
 }
+//se a stack a esta organizada ou se a stack a tem 3 numeros
+	//se a stack b nao esta vazia, devolver numeros para a stack a
+	//break ;
+//atualizar a mediana
+//passar o numero para b
+//organizar a lista b
+//se a stack a tem 3 numeros, organizar
+

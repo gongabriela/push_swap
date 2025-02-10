@@ -1,0 +1,19 @@
+supondo que a lista tem x elementos.
+primeiramente, devemos encontrar o melhor numero da stack_a para passar para a b.
+	esse numero sera aquele que, ao passar para a stack_b, tera no maximo um custo de 2 operacoes para organizar.
+o custo de passar os numeros da stack_a, olhando para os elementos de cima para baixo, e exatamente a sua posicao na lista (comecando em 1 e nao em 0 como o index de uma array).
+	olhando para os elementos de baixo para cima, o custo e igual a ????? a ultima posicao seria a primeira, e o custo e a posicao + 1. mas nao sei fazer uma equacao;
+		sendo p a posicao, seria n - (n - p) + 1;
+o custo para organizar na b:
+	se o seu bestie e 1, custa 0;
+	se o numero e o menor da lista, custa 1;
+	se o seu bestie e 2, custa 1;
+	se o seu bestie e 3, custa 2;
+
+comecamos vendo o custo de passar para a b + de organizar na b dos numeros da stack_a que estao nas posicoes 1, 2, e ultima.
+	se nenhuma destas tem no maximo X (que no caso comecaria sendo 4) operacoes, verificar se as posicoes 3 e x - 1 tem no maximo X + 1 operacoes.
+	e assim por diante, ate encontrar o numero com menor custo de operacoes e enfim, realizar estar operacoes.
+
+lista b cima : p x 2 + p  + 1
+lista b baixo: p x 2 + p
+
