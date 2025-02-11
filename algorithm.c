@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:51:02 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/10 11:29:31 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:01:42 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,3 +180,81 @@ void	big_sorting(t_list **head_a, t_list **tail_a)
 //organizar a lista b
 //se a stack a tem 3 numeros, organizar
 
+void	ft_my_sorting(t_list **head_a)
+{
+	//pegar a mediana da lista
+	//enquanto a stack_a tiver mais do que 3 elementos, vamos fazer o seguinte:
+	//primeiro, iremos verificar o primeiro, segundo e ultimo numeros da stack_a.
+	//se nenhum deles for menor ou igual a mediana, devemos olhar para o terceiro e penultimo numeros.
+	//e se esses tambem nao forem, devemos olhar para o quarto e antepenultimo, ate encontrar um numero.
+	//podemos fazer essas funcoes retornarem 1 (ou 0, nunca me lembro), para verificar se encontraram o numero e enviaram para a stack_b;
+	while (/*stack_a tem mais que 3 elementos*/)
+	{
+		if(ft_check_3())
+				ft_check_2();
+	}
+	if (/*stack_a tem 3 elementos*/)
+	{
+		//organizar stack_a
+		//devolver todos os numeros da stack_b para a stack_a
+	}
+
+}
+
+int	ft_check_3(t_list **head_a, t_list **head_b)
+{
+	//primeiro node *first_node
+		//se ele for menor ou igual a mediana:
+			//guardar numa variavel: custo de passar para a b + custo de organizar na b
+	//segundo node *scond_node
+		//se ele for menor ou igual a mediana:
+			//guardar numa variavel: custo de passar para a b + custo de organizar na b
+	//ultimo node *last_node
+		//se ele for menor ou igual a mediana:
+			//guardar numa variavel: custo de passar para a b + custo de organizar na b
+	//se nenhum numero e menor ou igual a mediana, sair da funcao
+	//se nao, verificar qual dos numeros tem menor custo
+	//se tiverem custos iguais, verificar qual numero e menor
+}
+
+int	ft_check_2(t_list **head_a, t_list **head_b)
+{
+	//ter um contador para cada node, que vai comecar com -1 e vai mudar de acordo com o custo. se for maior q a mediana vai permancer a -1
+	//enquanto nao encontrar um numero menor ou igual a mediana
+		//verificar numero do topo *top_node (no primeiro loop e o terceiro node)
+			//se ele for menor ou igual a mediana:
+				//guardar numa variavel: custo de passar para a b + custo de organizar na b
+		//verificar numero de baixo *bottom_node (no primeiro loop e o penultimo node)
+			//se ele for menor ou igual a mediana:
+				//guardar numa variavel: custo de passar para a b + custo de organizar na b
+		//se nenhum numero e menor ou igual a mediana (todos os contadores estao a -1): top_node = top_node->next e bottom_node = bottom_node->previous, e voltar pro inicio do loop
+	//se nao, verificar qual dos numeros tem menor custo
+	//se tiverem custos iguais, verificar qual numero e menor
+}
+int	ft_cost_a_to_b()
+{
+
+}
+int	ft_cost_sort_in_b()
+{
+
+}
+
+void	ft_a_to_b()
+{
+	//quando estamos verificando o numero que vamos passar para o a, podemos manter um contador.
+	//se encontrarmos o node de cima para baixo:
+	//se encontrarmos o node de baixo para cima:
+}
+
+void	ft_sort_in_b()
+{
+	//encontrar o numero na b que seja menor que o numero que esta no topo, e que tenha a menor diferenca possivel entre os dois:
+		//exemplo: o numero 30 esta no topo. encontramos os numero 5 10 27 que sao menores que 30. dos 3, 27 e o numero com a menor diferenca
+		//entao o 30 tem que estar em cima do 27!
+	//provavelmente teremos que fazer isso ao calcular o custo, entao podemos guardar esse contador que dira o no que o numero esta.
+	//diminuimos esse contador pelo total da lista para ver se devemos fazer as operacoes de cima-baixo ou de baixo-cima.
+	//se for de cima-baixo:
+	//se for de baixo-cima:
+
+}
