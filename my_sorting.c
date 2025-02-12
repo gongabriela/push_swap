@@ -81,7 +81,7 @@ void	ft_sorting(t_list **head_a)
 	ft_sort_3(&head_a);
 	ft_b_to_a(&head_a, &head_b);
 	if(ft_is_stack_sorted(&head_a) && head_b == NULL)
-		ft_free_lst(&stack_a);
+		ft_free_lst(*stack_a);
 	else
 		ft_error();
 }

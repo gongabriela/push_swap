@@ -1,0 +1,12 @@
+ja que temos um padrao para encontrar o custo dos movimentos, talvez seja possivel
+e mais rapido calcular esse custo com a utilizacao de um contador.
+
+verificamos primeiro a posicao que o node esta na lista. dependendo da posicao, vamos
+calcular de cima-baixo ou baixo-cima
+
+se usarmos a direcao cima-baixo, podemos passar para o proximo passo manualmente.
+se for direcao baixo-cinma, temos que usar um contador para ver a posicao baixo-cima.
+ex: o node 100 estara na posicao 1, e assim por diante.
+
+vemos primeiro se o node esta em um dos casos especificos (geralmente posicoes 1 e 2).
+se nao, aplicamos a formula.
