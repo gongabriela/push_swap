@@ -53,6 +53,18 @@ int	main(int argc, char **argv)
 
 	stack_a = NULL;
 	ft_init_stack(argc, argv, &stack_a);
+	t_list *temp = stack_a;
+	while (temp != NULL)
+	{
+		printf("element: %d\n", temp->number);
+		printf("direction: %s\n", temp->direction);
+		printf("position: %d\n", temp->position);
+		printf("cost: %d\n\n", temp->cost);
+        temp = temp->next;
+    }
+	tail_a = ft_lastnode(stack_a);
+	printf("init stack check\n");
+	printf("tail a nbr: %d\n", tail_a->number);
 	sorting_algorithm(&stack_a, &tail_a);
 	ft_free_lst(&stack_a);
 	return (0);
