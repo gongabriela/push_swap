@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 13:35:11 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/01/25 14:40:25 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:02:04 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ int	printf_ft_pointer(void *p)
 	write(1, "0x", 2);
 	return (2 + printf_ft_hexp((unsigned long long)p, "0123456789abcdef"));
 }
+
 int	printf_ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);
 }
+
 int	printf_ft_putnbr(int n)
 {
 	int	i;

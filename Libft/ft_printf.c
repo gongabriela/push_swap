@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:19:50 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/01/25 14:39:25 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:02:02 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	printf_ft_putstr(char *s)
 	}
 	return (i);
 }
+
 int	printf_ft_unsigned(unsigned int n)
 {
 	int	i;
