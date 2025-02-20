@@ -49,7 +49,7 @@ int	*init_int_args(t_list **stack_a, int size)
 	return (args);
 }
 
-int	ft_get_median(t_list **stack_a)
+int	get_median(t_list **stack_a)
 {;
 	int	*args;
 	int	size;

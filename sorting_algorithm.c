@@ -29,16 +29,4 @@
 	ft_b_to_a(stack_a, stack_b);
 }*/
 //para teste:
-void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
-{
-	int		median;
-	t_list *node_b;
 
-	node_b =  ft_new_node("4");
-	node_b->cost = 0;
-	node_b->next = NULL;
-	printf("init node b nbr: %d\n", node_b->number);
-	median = ft_get_median(stack_a);
-	printf("median: %d\n", median);
-	ft_check_3(stack_a, tail_a, &node_b, median);
-}

@@ -23,29 +23,17 @@ void	ft_check_cost(t_list *node_a, t_list *head_b, int median)
 		}
 		while (node_a->number < head_b->number && head_b->next != NULL)
 			head_b = head_b->next;
-		node_a->total_cost = node_a->cost + head_b->cost;
+		if (head_b->next == NULL && head_b->number > node_a->number)
+			node_a->total_cost = node_a->cost + 1; //vai so fazer rrb e por no fim
+		else
+			node_a->total_cost = node_a->cost + head_b->cost;
 	}
 	else
 		node_a->total_cost = -1;
 }
-/*t_list	*ft_chosen_node_3(t_list *node_1, t_list *node_2, t_list *last_node)
-{
-	t_list *best_node;
-	printf("got inside chossen node ft\n");
-	if (node_1->total_cost == -1 && node_2->total_cost == -1 && last_node->total_cost == -1)
-		return (NULL);
-	if ((node_1->total_cost == node_2->total_cost && node_1->number < node_2->number) || (node_1->total_cost < node_2->total_cost))
-		best_node = node_1;
-	else
-		best_node = node_2;
-	if ((best_node->total_cost == last_node->total_cost && best_node->number > last_node ->number) || (best_node->total_cost > last_node->total_cost))
-		best_node = last_node;
-	return (best_node);
-}*/
 
 t_list	*ft_chosen_node(t_list *node_1, t_list *node_2)
 {
-	printf("got inside chossen node ft\n");
 	if (!node_1 && node_2->total_cost == -1)
 		return (NULL);
 	else if (!node_1 && node_2->total_cost > -1)
@@ -61,22 +49,55 @@ t_list	*ft_chosen_node(t_list *node_1, t_list *node_2)
 	return(node_2);
 }
 
-int	ft_check_3(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
+void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list *best_node)
+{
+	t_list	*node_b;
+
+	node_b = *head_b;
+	while (best_node->number < node_b->number && node_b->next != NULL)
+		node_b = node_b->next;
+	if (best_node->direction == 't')
+		ft_move_top_a(head_a, head_b, best_node);
+	else
+		ft_move_bottom_a(head_a, head_b, best_node);
+	if (node_b->direction == 't')
+		ft_sort_top_b(head_b, node_b);
+	else
+		ft_sort_bottom_b(head_b, node_b);
+}
+int	check_trio(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
 {
 	t_list	*best_node;
 
 	ft_check_cost(*head_a, *head_b, median);
-	printf("node_1 cost: %d\n", (*head_a)->number);
 	ft_check_cost((*head_a)->next, *head_b, median);
-	printf("node_2 cost: %d\n", (*head_a)->next->cost);
 	ft_check_cost(*tail_a, *head_b, median);
-	printf("last_node cost: %d\n", (*tail_a)->cost);
 	best_node = ft_chosen_node(*head_a, (*head_a)->next);
 	best_node = ft_chosen_node(best_node, *tail_a);
 	if (!best_node)
 		return (1);
-	printf("number: %d and cost: %d\n", best_node->number, best_node->cost);
-	//t_list *node_b = ft_get_best_friend(best_node, head_b);
-	//ft_move_and_sort(&best_node, &node_b); //usar a position que ta guardada no node!! quase esqueci disso kkkkk
+	ft_move_and_sort(head_a, head_b, best_node);
 	return (0);
 }
+
+/*void	check_duo(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
+{
+	t_list	*best_node;
+	t_list	*temp_head;
+	t_list	*temp_tail;
+
+	temp_head = (*head_a)->next->next;
+	temp_tail = (*tail_a)->previous;
+	best_node = NULL;
+	while (best_node == NULL)
+	{
+		ft_check_cost(temp_head, *head_b, median);
+		ft_check_cost(temp_tail, *head_b, median);
+		if (temp_head->total_cost != -1 || temp_tail->total_cost != -1)
+			break ;
+		temp_head = temp_head->next;
+		temp_tail = temp_tail->previous;
+	}
+	best_node = ft_chosen_node(temp_head, temp_tail);
+	ft_move_and_sort(head_a, head_b, best_node);
+}*/

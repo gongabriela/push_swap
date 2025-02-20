@@ -12,20 +12,6 @@
 
 #include "push_swap.h"
 
-void	ft_lstprint(t_list *head)
-{
-	int		value;
-	t_list	*temp;
-
-	temp = head;
-	while (temp != NULL)
-	{
-		value = temp->number;
-		ft_printf("%d ", value);
-		temp = temp->next;
-	}
-}
-
 t_list	*ft_new_node(char	*args)
 {
 	t_list	*node;
@@ -76,7 +62,8 @@ void	ft_init_node(t_list *new_node, int size)
 	while (i <= (size + 1) / 2)
 	{
 		new_node->position = i;
-		new_node->direction = "top";
+		new_node->direction = 't';
+		new_node->total_cost = -2;
 		if (i == 1)
 			new_node->cost = 1;
 		else
@@ -91,7 +78,8 @@ void	ft_init_node(t_list *new_node, int size)
 	while (i > 0)
 	{
 		new_node->position = i;
-		new_node->direction = "bottom";
+		new_node->direction = 'b';
+		new_node->total_cost = -2;
 		new_node->cost = i + 1 + (i - 1);
 		new_node = new_node->next;
 		i--;

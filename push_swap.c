@@ -46,6 +46,29 @@ t_list	*ft_lastnode(t_list *stack_a)
 	return (stack_a);
 }
 
+void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
+{
+	int		median;
+	t_list *node_b;
+
+	node_b =  ft_new_node("4");
+	node_b->cost = 0;
+	node_b->direction = 'b';
+	node_b->position = 1;
+	node_b->next = NULL;
+
+	median = get_median(stack_a);
+	check_trio(stack_a, tail_a, &node_b, median);
+	/*if (check_trio(stack_a, tail_a, &node_b, median))
+		check_duo(stack_a, tail_a, &node_b, median);*/
+	printf("\nSTACK A ");
+	ft_lstprint(*stack_a);
+	printf("\n\nSTACK B ");
+	ft_lstprint(node_b);
+	ft_free_lst(&node_b);
+	printf("\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
@@ -53,29 +76,18 @@ int	main(int argc, char **argv)
 
 	stack_a = NULL;
 	ft_init_stack(argc, argv, &stack_a);
-	t_list *temp = stack_a;
-	while (temp != NULL)
-	{
-		printf("element: %d\n", temp->number);
-		printf("direction: %s\n", temp->direction);
-		printf("position: %d\n", temp->position);
-		printf("cost: %d\n\n", temp->cost);
-        temp = temp->next;
-    }
 	tail_a = ft_lastnode(stack_a);
-	printf("init stack check\n");
-	printf("tail a nbr: %d\n", tail_a->number);
 	sorting_algorithm(&stack_a, &tail_a);
 	ft_free_lst(&stack_a);
 	return (0);
 }
 
-/* testing variables of the nodes
-while (stack_a != NULL)
+	/*t_list *temp = stack_a;
+	while (temp != NULL)
 	{
-		printf("element: %d\n", stack_a->number);
-		printf("direction: %s\n", stack_a->direction);
-		printf("position: %d\n", stack_a->position);
-		printf("cost: %d\n\n", stack_a->cost);
-        stack_a = stack_a->next;
-    }*/
+		printf("element: %d\n", temp->number);
+		printf("direction: %c\n", temp->direction);
+		printf("position: %d\n", temp->position);
+		printf("cost: %d\n\n", temp->cost);
+        temp = temp->next;
+	}*/
