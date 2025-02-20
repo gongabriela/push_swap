@@ -20,6 +20,7 @@ t_list	*ft_new_node(char	*args)
 	if (node == NULL)
 		return (NULL);
 	node->number = ft_atol(args);
+	node->previous = NULL;
 	node->next = NULL;
 	return (node);
 }
@@ -35,6 +36,7 @@ void	ft_lstadd_back(t_list **stack_a, t_list *new_node)
 	}
 	else
 	{
+		new_node->previous = tail_a;
 		tail_a->next = new_node;
 		tail_a = tail_a->next;
 	}

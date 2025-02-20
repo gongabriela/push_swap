@@ -58,9 +58,9 @@ void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 	node_b->next = NULL;
 
 	median = get_median(stack_a);
-	check_trio(stack_a, tail_a, &node_b, median);
-	/*if (check_trio(stack_a, tail_a, &node_b, median))
-		check_duo(stack_a, tail_a, &node_b, median);*/
+	//check_trio(stack_a, tail_a, &node_b, median);
+	if (check_trio(stack_a, tail_a, &node_b, median))
+		check_duo(stack_a, tail_a, &node_b, median);
 	printf("\nSTACK A ");
 	ft_lstprint(*stack_a);
 	printf("\n\nSTACK B ");

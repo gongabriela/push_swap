@@ -80,7 +80,7 @@ int	check_trio(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
 	return (0);
 }
 
-/*void	check_duo(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
+void	check_duo(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
 {
 	t_list	*best_node;
 	t_list	*temp_head;
@@ -100,4 +100,4 @@ int	check_trio(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
 	}
 	best_node = ft_chosen_node(temp_head, temp_tail);
 	ft_move_and_sort(head_a, head_b, best_node);
-}*/
+}
