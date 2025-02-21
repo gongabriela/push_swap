@@ -31,13 +31,13 @@ int	ft_int_check_if_sorted(int *int_args, int args_size)
 	return(sorted);
 }
 
-int	*init_int_args(t_list **stack_a, int size)
+int	*init_int_args(t_list *stack_a, int size)
 {
 	t_list	*head_a;
 	int		*args;
 	int		i;
 
-	head_a = *stack_a;
+	head_a = stack_a;
 	args = ft_calloc(size, sizeof(int));
 	i = 0;
 	while (head_a != NULL)
@@ -49,14 +49,14 @@ int	*init_int_args(t_list **stack_a, int size)
 	return (args);
 }
 
-int	get_median(t_list **stack_a)
-{;
+int	get_median(t_list *stack_a)
+{
 	int	*args;
 	int	size;
 	int	i;
 	int	temp;
 
-	size = ft_lstsize(*stack_a);
+	size = ft_lstsize(stack_a);
 	args  = init_int_args(stack_a, size);
 	while (ft_int_check_if_sorted(args, size))
 	{

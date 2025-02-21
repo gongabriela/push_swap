@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:04:30 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/03 15:35:10 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:19:15 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ char	*ft_itoa(int n);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	**ft_split(char const *s, char c);
-
+int		ft_isspace(int c);
+long	ft_atol(const char *str);
 #endif

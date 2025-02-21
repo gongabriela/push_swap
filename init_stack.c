@@ -44,46 +44,18 @@ void	ft_lstadd_back(t_list **stack_a, t_list *new_node)
 
 int	ft_lstsize(t_list *head)
 {
+	t_list *temp;
 	int	i;
 
+	temp = head;
+	if (!temp)
+		return (0);
 	i = 0;
-	while (head != NULL)
+	while (temp != NULL)
 	{
-		head = head->next;
+		temp = temp->next;
 		i++;
 	}
 	return (i);
 }
 
-//FUNCAO COM MAIS DE 25 LINHAS DEIXA DE PREGUICA E VAI DIVIDIR
-void	ft_init_node(t_list *new_node, int size)
-{
-	int	i;
-
-	i = 1;
-	while (i <= (size + 1) / 2)
-	{
-		new_node->position = i;
-		new_node->direction = 't';
-		new_node->total_cost = -2;
-		if (i == 1)
-			new_node->cost = 1;
-		else
-			new_node->cost = i + (i - 2);
-		i++;
-		new_node = new_node->next;
-	}
-	if (size % 2 == 0)
-		i = i - 1;
-	else
-		i = i - 2;
-	while (i > 0)
-	{
-		new_node->position = i;
-		new_node->direction = 'b';
-		new_node->total_cost = -2;
-		new_node->cost = i + 1 + (i - 1);
-		new_node = new_node->next;
-		i--;
-	}
-}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_move_and_sort.c                                 :+:      :+:    :+:   */
+/*   move_and_sort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 16:10:27 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/20 16:10:27 by ggoncalv         ###   ########.fr       */
+/*   Created: 2025/02/21 21:23:57 by ggoncalv          #+#    #+#             */
+/*   Updated: 2025/02/21 21:23:57 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ void	ft_sort_top_b(t_list **head_b, t_list *node_b)
 	int	counter;
 
 	if (ft_lstsize(*head_b) == 2 || node_b->position == 1)
+	{
+		if (node_b->number > (*head_b)->number)
+			return (ft_rra_rrb(head_b, 1));
 		return ;
+	}
 	else
 	{
 		counter = node_b->position - 2;
@@ -70,6 +74,7 @@ void	ft_sort_top_b(t_list **head_b, t_list *node_b)
 	}
 }
 
+//parece que nao ta performando os movimentos...
 void	ft_sort_bottom_b(t_list **head_b, t_list *node_b)
 {
 	int	counter;
@@ -78,9 +83,9 @@ void	ft_sort_bottom_b(t_list **head_b, t_list *node_b)
 	{
 		if (node_b->number > (*head_b)->number)
 			return (ft_rra_rrb(head_b, 1));
-		else if (ft_lstsize(*head_b) == 2)
-			return ;
 	}
+	if (ft_lstsize(*head_b) == 2)
+		return ;
 	else
 	{
 		counter = node_b->position;
@@ -93,4 +98,25 @@ void	ft_sort_bottom_b(t_list **head_b, t_list *node_b)
 		while (counter-- > 0)
 			ft_ra_rb(head_b, 1);
 	}
+}
+
+void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list *best_node)
+{
+	t_list	*node_b;
+
+	if (best_node->direction == 't')
+		ft_move_top_a(head_a, head_b, best_node);
+	else
+		ft_move_bottom_a(head_a, head_b, best_node);
+	ft_lstprint(*head_a);
+	ft_lstprint(*head_b);
+	if (ft_lstsize(*head_b) == 1)
+		return ;
+	node_b = *head_b;
+	while (best_node->number <= node_b->number && node_b->next != NULL)
+		node_b = node_b->next;
+	if (node_b->direction == 't')
+		ft_sort_top_b(head_b, node_b);
+	else
+		ft_sort_bottom_b(head_b, node_b);
 }
