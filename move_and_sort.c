@@ -82,7 +82,7 @@ void	ft_sort_bottom_b(t_list **head_b, t_list *node_b)
 	if (ft_lstsize(*head_b) == 2 || node_b->position == 1)
 	{
 		if (node_b->number > (*head_b)->number)
-			return (ft_rra_rrb(head_b, 1));
+			return (ft_ra_rb(head_b, 1));
 	}
 	if (ft_lstsize(*head_b) == 2)
 		return ;
@@ -99,8 +99,16 @@ void	ft_sort_bottom_b(t_list **head_b, t_list *node_b)
 			ft_ra_rb(head_b, 1);
 	}
 }
+t_list	*ft_lstlast(t_list **head_a)
+{
+	t_list *tail_a;
 
-void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list *best_node)
+	tail_a = *head_a;
+	while(tail_a->next != NULL)
+		tail_a = tail_a->next;
+	return (tail_a);
+}
+void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list **tail_a, t_list *best_node)
 {
 	t_list	*node_b;
 
@@ -108,10 +116,9 @@ void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list *best_node)
 		ft_move_top_a(head_a, head_b, best_node);
 	else
 		ft_move_bottom_a(head_a, head_b, best_node);
-	ft_lstprint(*head_a);
-	ft_lstprint(*head_b);
 	if (ft_lstsize(*head_b) == 1)
 		return ;
+	*tail_a = ft_lstlast(head_a);
 	node_b = *head_b;
 	while (best_node->number <= node_b->number && node_b->next != NULL)
 		node_b = node_b->next;

@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:35:58 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/21 21:58:26 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:59:48 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	ft_move_top_a(t_list **head_a, t_list **head_b, t_list *best_node);
 void	ft_move_bottom_a(t_list **head_a, t_list **head_b, t_list *best_node);
 void	ft_sort_top_b(t_list **head_b, t_list *node_b);
 void	ft_sort_bottom_b(t_list **head_b, t_list *node_b);
-void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list *best_node);
+t_list	*ft_lstlast(t_list **head_a);
+void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list **tail_a, t_list *best_node);
 
 //movements:
 void	ft_print_mov(int index, char *mov);

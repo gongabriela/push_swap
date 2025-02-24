@@ -46,42 +46,45 @@ void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 	t_list *stack_b;
 
 	stack_b = NULL;
-	median = get_median(*stack_a);
-	printf("median: %d\n", median);
-
+	/*median = get_median(*stack_a);
 	if (check_trio(stack_a, tail_a, &stack_b, median))
 		check_duo(stack_a, tail_a, &stack_b, median);
 	ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
 	ft_init_node_b(stack_b, ft_lstsize(stack_b));
 	ft_lstprint(*stack_a);
-	ft_lstprint(stack_b);
+	ft_lstprint(stack_b);*/
 
 	//printf("median: %d\n", median);
-	while(ft_lstsize(*stack_a) != 3)
+	while(ft_lstsize(*stack_a) != 2)
 	{
 		median = get_median(*stack_a);
+		//printf("median: %d\n", median);
 		if (check_trio(stack_a, tail_a, &stack_b, median))
 			check_duo(stack_a, tail_a, &stack_b, median);
 		ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
 		ft_init_node_b(stack_b, ft_lstsize(stack_b));
+		//ft_lstprint(*stack_a);
+		//ft_lstprint(stack_b);
+		/*t_list *temp = stack_b;
+		while (temp != NULL)
+		{
+			if (temp->previous != NULL)
+				printf("previous: %d\n", temp->previous->number);
+			printf("position: %d\n", temp->position);
+			printf("number: %d\n", temp->number);
+			printf("direction: %c\n", temp->direction);
+			printf("cost: %d\n", temp->cost);
+			printf("total cost: %d\n", temp->total_cost);
+			if (temp->next != NULL)
+				printf("next: %d\n\n", temp->next->number);
+			temp = temp->next;
+		}
+		printf("\n\n");*/
 	}
-	//ft_lstprint(*stack_a);
+	//ft_sort_a(stack_a, &stack_b, tail_a);
+	//ft_back_to_a(stack_a, &stack_b);
+	ft_lstprint(*stack_a);
 	ft_lstprint(stack_b);
-	/*t_list *temp = node_b;
-	while (temp != NULL)
-	{
-		if (temp->previous != NULL)
-			printf("previous: %d\n", temp->previous->number);
-		printf("position: %d\n", temp->position);
-		printf("number: %d\n", temp->number);
-		printf("direction: %c\n", temp->direction);
-		printf("cost: %d\n", temp->cost);
-		printf("total cost: %d\n", temp->total_cost);
-		if (temp->next != NULL)
-			printf("next: %d\n\n", temp->next->number);
-		temp = temp->next;
-	}
-	printf("\n\n");*/
 }
 
 int	main(int argc, char **argv)
@@ -92,7 +95,7 @@ int	main(int argc, char **argv)
 	stack_a = NULL;
 	ft_init_stack(argc, argv, &stack_a, &tail_a);
 	sorting_algorithm(&stack_a, &tail_a);
-	ft_lstprint(stack_a);
+	//ft_lstprint(stack_a);
 	/*t_list *temp = stack_a;
 	while (temp != NULL)
 	{

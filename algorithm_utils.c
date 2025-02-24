@@ -55,16 +55,11 @@ int	check_trio(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
 	ft_check_cost(*head_a, *head_b, median);
 	ft_check_cost((*head_a)->next, *head_b, median);
 	ft_check_cost(*tail_a, *head_b, median);
-
 	best_node = ft_chosen_node(*head_a, (*head_a)->next);
 	best_node = ft_chosen_node(best_node, *tail_a);
-
 	if (!best_node)
 		return (1);
-
-	//printf("\nbest node: %d\n", best_node->number);
-
-	ft_move_and_sort(head_a, head_b, best_node);
+	ft_move_and_sort(head_a, head_b, tail_a, best_node);
 
 	return (0);
 }
@@ -84,6 +79,27 @@ void	check_duo(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
 		ft_check_cost(temp_tail, *head_b, median);
 	}
 	best_node = ft_chosen_node(temp_head, temp_tail);
-	//printf("\nbest node: %d\n", best_node->number);
-	ft_move_and_sort(head_a, head_b, best_node);
+	ft_move_and_sort(head_a, head_b, tail_a, best_node);
 }
+
+/*void	ft_sort_a(t_list **head_a, t_list **tail_a, t_list **head_b)
+{
+	t_list *temp;
+
+	temp = *head_a;
+	while (temp != NULL)
+	{
+		if (temp->number < head_b->number)
+		{
+			ft_move_and_sort(head_a, head_b, tail_a, temp);
+			break ;
+		}
+		temp = temp->next;
+	}
+	if (ft_lstsize(*head_a) == 1)
+		return ;
+	if (ft_lstsize(*head_a) == 2)
+	{
+
+	}
+}*/
