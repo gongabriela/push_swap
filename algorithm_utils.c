@@ -81,7 +81,34 @@ void	check_duo(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
 	best_node = ft_chosen_node(temp_head, temp_tail);
 	ft_move_and_sort(head_a, head_b, tail_a, best_node);
 }
+/*void	check_best_node(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
+{
+	t_list	*best_node;
+	t_list	*temp_head;
+	t_list	*temp_tail;
 
+	temp_head = *head_a;
+	temp_tail = *tail_a;
+	while (temp_head != NULL && temp_tail != NULL)
+	{
+		best_node = NULL;
+		while (!best_node)
+		ft_check_cost(temp_head, *head_b, median);
+		ft_check_cost(temp_tail, *head_b, median);
+		best_node = ft_chosen_node(temp_head, temp_tail);
+		if (best_node)
+		{
+			ft_move_and_sort(head_a, head_b, tail_a, best_node);
+			temp_head = *head_a;
+			temp_tail = *tail_a;
+		}
+		else
+		{
+			temp_head = temp_head->next;
+			temp_tail = temp_tail->previous;
+		}
+	}
+}*/
 /*void	ft_sort_a(t_list **head_a, t_list **tail_a, t_list **head_b)
 {
 	t_list *temp;

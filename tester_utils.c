@@ -54,3 +54,45 @@ void	ft_lstprint(t_list *head)
 	ft_rra_rrb(head_b, 1);
 	ft_lstprint(*head_a);
 	ft_lstprint(*head_b);*/
+
+			/*t_list *temp = stack_b;
+		while (temp != NULL)
+		{
+			if (temp->previous != NULL)
+				printf("previous: %d\n", temp->previous->number);
+			printf("position: %d\n", temp->position);
+			printf("number: %d\n", temp->number);
+			printf("direction: %c\n", temp->direction);
+			printf("cost: %d\n", temp->cost);
+			printf("total cost: %d\n", temp->total_cost);
+			if (temp->next != NULL)
+				printf("next: %d\n\n", temp->next->number);
+			temp = temp->next;
+		}
+		printf("\n\n");*/
+
+			/*median = get_median(*stack_a);
+	if (check_trio(stack_a, tail_a, &stack_b, median))
+		check_duo(stack_a, tail_a, &stack_b, median);
+	ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
+	ft_init_node_b(stack_b, ft_lstsize(stack_b));
+	ft_lstprint(*stack_a);
+	ft_lstprint(stack_b);*/
+
+	//printf("median: %d\n", median);
+
+		//ft_lstprint(stack_a);
+	/*t_list *temp = stack_a;
+	while (temp != NULL)
+	{
+		if (temp->previous != NULL)
+			printf("previous: %d\n", temp->previous->number);
+		printf("position: %d\n", temp->position);
+		printf("number: %d\n", temp->number);
+		printf("direction: %c\n", temp->direction);
+		printf("cost: %d\n", temp->cost);
+		printf("total cost: %d\n", temp->total_cost);
+		if (temp->next != NULL)
+			printf("next: %d\n\n", temp->next->number);
+		temp = temp->next;
+	}*/
