@@ -25,9 +25,9 @@ void	ft_move_top_a(t_list **head_a, t_list **head_b, t_list *best_node)
 			ft_ra_rb(head_a, 0);
 		ft_sa_sb(head_a, 0);
 		ft_pa_pb(head_a, head_b, 1);
-		counter = best_node->position - 2;
+		/*counter = best_node->position - 2;
 		while (counter-- > 0)
-			ft_rra_rrb(head_a, 0);
+			ft_rra_rrb(head_a, 0);*/
 	}
 }
 
@@ -43,9 +43,9 @@ void	ft_move_bottom_a(t_list **head_a, t_list **head_b, t_list *best_node)
 		while (counter-- > 0)
 			ft_rra_rrb(head_a, 0);
 		ft_pa_pb(head_a, head_b, 1);
-		counter = best_node->position - 1;
+		/*counter = best_node->position - 1;
 		while (counter-- > 0)
-			ft_ra_rb(head_a, 0);
+			ft_ra_rb(head_a, 0);*/
 	}
 }
 

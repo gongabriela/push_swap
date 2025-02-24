@@ -55,16 +55,17 @@ void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 	ft_lstprint(stack_b);*/
 
 	//printf("median: %d\n", median);
-	while(ft_lstsize(*stack_a) != 2)
+	while(ft_lstsize(*stack_a) != 3)
 	{
 		median = get_median(*stack_a);
-		//printf("median: %d\n", median);
+		printf("median: %d\n", median);
 		if (check_trio(stack_a, tail_a, &stack_b, median))
 			check_duo(stack_a, tail_a, &stack_b, median);
 		ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
 		ft_init_node_b(stack_b, ft_lstsize(stack_b));
-		//ft_lstprint(*stack_a);
-		//ft_lstprint(stack_b);
+		ft_lstprint(*stack_a);
+		ft_lstprint(stack_b);
+		printf("\n");
 		/*t_list *temp = stack_b;
 		while (temp != NULL)
 		{
