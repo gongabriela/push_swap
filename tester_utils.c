@@ -96,3 +96,42 @@ void	ft_lstprint(t_list *head)
 			printf("next: %d\n\n", temp->next->number);
 		temp = temp->next;
 	}*/
+
+	/*void	check_best_node(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
+{
+	t_list	*best_node;
+	t_list	*temp_head;
+	t_list	*temp_tail;
+
+	temp_head = *head_a;
+	temp_tail = *tail_a;
+	while (temp_head != NULL && temp_tail != NULL)
+	{
+		best_node = NULL;
+		while (!best_node)
+		ft_check_cost(temp_head, *head_b, median);
+		ft_check_cost(temp_tail, *head_b, median);
+		best_node = ft_chosen_node(temp_head, temp_tail);
+		if (best_node)
+		{
+			ft_move_and_sort(head_a, head_b, tail_a, best_node);
+			temp_head = *head_a;
+			temp_tail = *tail_a;
+		}
+		else
+		{
+			temp_head = temp_head->next;
+			temp_tail = temp_tail->previous;
+		}
+	}
+}*/
+
+	/*ft_sort_a(stack_a, tail_a);
+	ft_lstprint(*stack_a);
+	ft_lstprint(stack_b);
+	printf("\n\n");
+	while (stack_b != NULL)
+		ft_pa_pb(stack_a, &stack_b, 1);
+	ft_lstprint(*stack_a);
+	ft_lstprint(stack_b);
+	printf("\n\n");*/

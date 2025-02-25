@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:35:58 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/24 18:39:35 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:44:17 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_sa_sb(t_list **head, int flag);
 void 	ft_pa_pb(t_list **stack_a, t_list **stack_b, int flag);
 void	ft_ra_rb(t_list **stack, int flag);
 void	ft_rra_rrb(t_list **stack, int flag);
-
+void	ft_pb(t_list **stack_a, t_list **stack_b, int flag);
 //PARTE II - algoritmo:
 void	sorting_algorithm(t_list **stack_a, t_list **tail_a);
 int		check_trio(t_list **head_a, t_list **tail_a, t_list **head_b, int median);
@@ -76,4 +76,6 @@ t_list	*ft_chosen_node(t_list *node_1, t_list *node_2);
 void	ft_check_cost(t_list *node_a, t_list *head_b, int median);
 void	ft_init_node_b_bottom(t_list *stack_b, int i);
 void	ft_init_node_b(t_list *stack_b, int size);
+void	ft_sort_a(t_list **head_a, t_list **tail_a);
+
 #endif

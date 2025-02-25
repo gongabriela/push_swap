@@ -57,6 +57,20 @@ void ft_pa_pb(t_list **stack_a, t_list **stack_b, int flag)
 	ft_print_mov(flag, "p");
 }
 
+void	ft_pb(t_list **stack_a, t_list **stack_b, int flag)
+{
+	if (!(*stack_b))
+		return ;
+	t_list *node_b = *stack_b;
+	*stack_b = (*stack_b)->next;
+	if (*stack_b)
+		(*stack_b)->previous = NULL;
+	node_b->next = *stack_a;
+	(*stack_a)->previous = node_b;
+	*stack_a = node_b;
+	ft_print_mov(flag, "p");
+}
+
 void	ft_sa_sb(t_list **head, int flag)
 {
 	t_list *node_1;

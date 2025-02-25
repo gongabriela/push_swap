@@ -53,17 +53,23 @@ void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 		median = get_median(*stack_a);
 		while (ft_lstsize(*stack_a) > current_size)
 		{
-			printf("median: %d\n", median);
+			//printf("median: %d\n", median);
 			if (check_trio(stack_a, tail_a, &stack_b, median))
 				check_duo(stack_a, tail_a, &stack_b, median);
 			//check_best_node(stack_a, tail_a, &stack_b, median);
 			ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
 			ft_init_node_b(stack_b, ft_lstsize(stack_b));
-			ft_lstprint(*stack_a);
-			ft_lstprint(stack_b);
-			printf("\n\n");
+			//printf("\n\n");
 		}
 	}
+	ft_sort_a(stack_a, tail_a);
+	ft_lstprint(*stack_a);
+	ft_lstprint(stack_b);
+	printf("\n\n");
+	while (ft_lstsize(stack_b) > 0)
+		ft_pb(stack_a, &stack_b, 1);
+	ft_lstprint(*stack_a);
+	ft_lstprint(stack_b);
 }
 
 int	main(int argc, char **argv)

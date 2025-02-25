@@ -81,52 +81,19 @@ void	check_duo(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
 	best_node = ft_chosen_node(temp_head, temp_tail);
 	ft_move_and_sort(head_a, head_b, tail_a, best_node);
 }
-/*void	check_best_node(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
+
+void	ft_sort_a(t_list **head_a, t_list **tail_a)
 {
-	t_list	*best_node;
-	t_list	*temp_head;
-	t_list	*temp_tail;
-
-	temp_head = *head_a;
-	temp_tail = *tail_a;
-	while (temp_head != NULL && temp_tail != NULL)
+	while (!ft_check_if_sorted(head_a))
 	{
-		best_node = NULL;
-		while (!best_node)
-		ft_check_cost(temp_head, *head_b, median);
-		ft_check_cost(temp_tail, *head_b, median);
-		best_node = ft_chosen_node(temp_head, temp_tail);
-		if (best_node)
+		if ((*head_a)->number > (*head_a)->next->number)
+			ft_sa_sb(head_a, 0);
+		if ((*head_a)->number > (*tail_a)->number)
+			ft_ra_rb(head_a, 0);
+		if ((*head_a)->next->number > (*tail_a)->number)
 		{
-			ft_move_and_sort(head_a, head_b, tail_a, best_node);
-			temp_head = *head_a;
-			temp_tail = *tail_a;
-		}
-		else
-		{
-			temp_head = temp_head->next;
-			temp_tail = temp_tail->previous;
+			ft_rra_rrb(head_a, 0);
+			ft_sa_sb(head_a, 0);
 		}
 	}
-}*/
-/*void	ft_sort_a(t_list **head_a, t_list **tail_a, t_list **head_b)
-{
-	t_list *temp;
-
-	temp = *head_a;
-	while (temp != NULL)
-	{
-		if (temp->number < head_b->number)
-		{
-			ft_move_and_sort(head_a, head_b, tail_a, temp);
-			break ;
-		}
-		temp = temp->next;
-	}
-	if (ft_lstsize(*head_a) == 1)
-		return ;
-	if (ft_lstsize(*head_a) == 2)
-	{
-
-	}
-}*/
+}
