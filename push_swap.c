@@ -73,41 +73,36 @@ void	ft_init_stack(int argc, char **argv, t_list **stack_a, t_list **tail_a)
 }*/
 
 //versao bubble sort
-void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
+void sorting_algorithm(t_list **stack_a, t_list **tail_a)
 {
 	t_list *stack_b;
-	int		median;
-	int		bubble;
-	int		i;
+	int *chunk;
+	int i;
 
 	stack_b = NULL;
-	while(ft_lstsize(*stack_a) > 3)
+	i = 0;
+	chunk = get_median(*stack_a);
+	while (ft_lstsize(*stack_a) > 3)
 	{
-		i = 6; //ate o 4 diminui, dps n faz mta diferenca
-		median = get_median(*stack_a);
-		//printf("MEDIAN: %d\n\n", median);
-		while (ft_lstsize(*stack_a) > 3 && i > 0)
+		while (get_numbers_bellow_median(*stack_a, chunk[i]) > 0 && ft_lstsize(*stack_a) > 3)
 		{
-			bubble = median / i;
-			while (get_numbers_bellow_median(*stack_a, bubble) > 0)
-			{
-				//printf("bubble: %d\n", bubble);
-				if (check_trio(stack_a, tail_a, &stack_b, bubble))
-					check_duo(stack_a, tail_a, &stack_b, bubble);
-				ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
-				ft_init_node_b(stack_b, ft_lstsize(stack_b));
-				//ft_lstprint(*stack_a);
-				//ft_lstprint(stack_b);
-				//printf("\n\n");
-			}
-			i--;
+			//printf("chunk: %d\n", chunk[i]);
+			if (check_trio(stack_a, tail_a, &stack_b, chunk[i]))
+				check_duo(stack_a, tail_a, &stack_b, chunk[i]);
+			ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
+			ft_init_node_b(stack_b, ft_lstsize(stack_b));
+			//ft_lstprint(*stack_a);
+			//ft_lstprint(stack_b);
+			//printf("\n\n");
 		}
+		i++;
 	}
 	ft_sort_a(stack_a, tail_a);
 	while (ft_lstsize(stack_b) > 0)
 		ft_pb(stack_a, &stack_b, 1);
-	ft_lstprint(*stack_a);
-	ft_lstprint(stack_b);
+	//ft_lstprint(*stack_a);
+	//ft_lstprint(stack_b);
+	free(chunk);
 }
 int	main(int argc, char **argv)
 {

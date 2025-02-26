@@ -135,3 +135,9 @@ void	ft_lstprint(t_list *head)
 	ft_lstprint(*stack_a);
 	ft_lstprint(stack_b);
 	printf("\n\n");*/
+
+	//median trash
+	/*if (size % 2 == 1)
+		temp = args[size / 2];
+	else
+		temp = args[(size / 2) - 1]; */

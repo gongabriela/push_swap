@@ -49,9 +49,28 @@ int	*init_int_args(t_list *stack_a, int size)
 	return (args);
 }
 
-int	get_median(t_list *stack_a)
+int	*get_chunks(int *args, int size)
+{
+	int	*chunks;
+	int	i;
+	int div;
+
+	chunks = malloc(5 * sizeof(int));
+	div = size / 5;
+	i = 0;
+	while (i < 5)
+	{
+		chunks[i] = args[div * (i + 1)];
+		i++;
+	}
+	chunks[i] = args[size - 1];
+	return (chunks);
+}
+
+int	*get_median(t_list *stack_a)
 {
 	int	*args;
+	int	*chunks;
 	int	size;
 	int	i;
 	int	temp;
@@ -72,9 +91,7 @@ int	get_median(t_list *stack_a)
 			i++;
 		}
 	}
-	if (size % 2 == 1)
-		temp = args[size / 2];
-	else
-		temp = args[(size / 2) - 1];
-	return (free(args), temp);
+	chunks = get_chunks(args, size);
+	return (free(args), chunks);
 }
+

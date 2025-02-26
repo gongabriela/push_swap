@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:35:58 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/25 16:39:58 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:18:15 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int		ft_lstsize(t_list *head);
 //utils da median
 int		ft_int_check_if_sorted(int *int_args, int args_size);
 int		*init_int_args(t_list *stack_a, int size);
-int		get_median(t_list *head_a);
+int		*get_chunks(int *args, int size);
+int		*get_median(t_list *head_a);
 
 //move_and_sort utils:
 void	ft_move_top_a(t_list **head_a, t_list **head_b, t_list *best_node);
