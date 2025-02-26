@@ -83,25 +83,24 @@ void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 	stack_b = NULL;
 	while(ft_lstsize(*stack_a) > 3)
 	{
-		i = 1;
+		i = 6; //ate o 4 diminui, dps n faz mta diferenca
 		median = get_median(*stack_a);
-		bubble = median;
-		while (get_numbers_bellow_median(*stack_a, bubble) > 0)
+		//printf("MEDIAN: %d\n\n", median);
+		while (ft_lstsize(*stack_a) > 3 && i > 0)
 		{
-			bubble = median / ++i;
-			printf("bubble: %d", bubble);
-		}
-		while (ft_lstsize(*stack_a) > 3 || i > 0)
-		{
+			bubble = median / i;
 			while (get_numbers_bellow_median(*stack_a, bubble) > 0)
 			{
+				//printf("bubble: %d\n", bubble);
 				if (check_trio(stack_a, tail_a, &stack_b, bubble))
 					check_duo(stack_a, tail_a, &stack_b, bubble);
-				ft_lstprint(*stack_a);
-				ft_lstprint(stack_b);
-				printf("\n\n");
+				ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
+				ft_init_node_b(stack_b, ft_lstsize(stack_b));
+				//ft_lstprint(*stack_a);
+				//ft_lstprint(stack_b);
+				//printf("\n\n");
 			}
-			bubble = median / --i;
+			i--;
 		}
 	}
 	ft_sort_a(stack_a, tail_a);
