@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:35:58 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/02/25 11:44:17 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:39:58 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ void	ft_check_cost(t_list *node_a, t_list *head_b, int median);
 void	ft_init_node_b_bottom(t_list *stack_b, int i);
 void	ft_init_node_b(t_list *stack_b, int size);
 void	ft_sort_a(t_list **head_a, t_list **tail_a);
-
+int		get_numbers_bellow_median(t_list *stack_a, int median);
 #endif

@@ -53,6 +53,8 @@ void	ft_sort_top_b(t_list **head_b, t_list *node_b)
 {
 	int	counter;
 
+	if (!ft_check_if_sorted(head_b))
+		return ;
 	if (ft_lstsize(*head_b) == 2 || node_b->position == 1)
 	{
 		if (node_b->number > (*head_b)->number)
@@ -116,9 +118,9 @@ void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list **tail_a, t_list 
 		ft_move_top_a(head_a, head_b, best_node);
 	else
 		ft_move_bottom_a(head_a, head_b, best_node);
+	*tail_a = ft_lstlast(head_a);
 	if (ft_lstsize(*head_b) == 1)
 		return ;
-	*tail_a = ft_lstlast(head_a);
 	node_b = *head_b;
 	while (best_node->number <= node_b->number && node_b->next != NULL)
 		node_b = node_b->next;

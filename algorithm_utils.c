@@ -48,6 +48,21 @@ t_list	*ft_chosen_node(t_list *node_1, t_list *node_2)
 		return (node_1);
 	return(node_2);
 }
+
+int	get_numbers_bellow_median(t_list *stack_a, int median)
+{
+	int	counter;
+
+	counter = 0;
+	while(stack_a != NULL)
+	{
+		if (stack_a->number <= median)
+			counter++;
+		stack_a = stack_a->next;
+	}
+	return (counter);
+}
+
 int	check_trio(t_list **head_a, t_list **tail_a, t_list **head_b, int median)
 {
 	t_list	*best_node;

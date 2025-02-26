@@ -39,18 +39,16 @@ void	ft_init_stack(int argc, char **argv, t_list **stack_a, t_list **tail_a)
 	ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
 	ft_free_args(args);
 }
-
-void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
+//versao meio turk/ meio mediana
+/*void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 {
 	int		median;
-	int		current_size;
 	t_list *stack_b;
 
 	stack_b = NULL;
 	while(ft_lstsize(*stack_a) != 3)
 	{
-		current_size = ft_lstsize(*stack_a) / 3;
-		median = get_median(*stack_a);
+		median = get_median(*stack_a); //talvez tambem dividir a mediana em 2 ou 3 ou 4 partes? para passar os numeros mais proximos... nao sei. pq ja vimos que custa menos rodar a stack_a do que organizar na st
 		while (ft_lstsize(*stack_a) > current_size)
 		{
 			//printf("median: %d\n", median);
@@ -59,6 +57,8 @@ void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 			//check_best_node(stack_a, tail_a, &stack_b, median);
 			ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
 			ft_init_node_b(stack_b, ft_lstsize(stack_b));
+			//ft_lstprint(*stack_a);
+			//ft_lstprint(stack_b);
 			//printf("\n\n");
 		}
 	}
@@ -68,10 +68,48 @@ void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 	//printf("\n\n");
 	while (ft_lstsize(stack_b) > 0)
 		ft_pb(stack_a, &stack_b, 1);
-	//ft_lstprint(*stack_a);
-	//ft_lstprint(stack_b);
-}
+	ft_lstprint(*stack_a);
+	ft_lstprint(stack_b);
+}*/
 
+//versao bubble sort
+void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
+{
+	t_list *stack_b;
+	int		median;
+	int		bubble;
+	int		i;
+
+	stack_b = NULL;
+	while(ft_lstsize(*stack_a) > 3)
+	{
+		i = 1;
+		median = get_median(*stack_a);
+		bubble = median;
+		while (get_numbers_bellow_median(*stack_a, bubble) > 0)
+		{
+			bubble = median / ++i;
+			printf("bubble: %d", bubble);
+		}
+		while (ft_lstsize(*stack_a) > 3 || i > 0)
+		{
+			while (get_numbers_bellow_median(*stack_a, bubble) > 0)
+			{
+				if (check_trio(stack_a, tail_a, &stack_b, bubble))
+					check_duo(stack_a, tail_a, &stack_b, bubble);
+				ft_lstprint(*stack_a);
+				ft_lstprint(stack_b);
+				printf("\n\n");
+			}
+			bubble = median / --i;
+		}
+	}
+	ft_sort_a(stack_a, tail_a);
+	while (ft_lstsize(stack_b) > 0)
+		ft_pb(stack_a, &stack_b, 1);
+	ft_lstprint(*stack_a);
+	ft_lstprint(stack_b);
+}
 int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
