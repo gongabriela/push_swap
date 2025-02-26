@@ -100,8 +100,8 @@ void sorting_algorithm(t_list **stack_a, t_list **tail_a)
 	ft_sort_a(stack_a, tail_a);
 	while (ft_lstsize(stack_b) > 0)
 		ft_pb(stack_a, &stack_b, 1);
-	//ft_lstprint(*stack_a);
-	//ft_lstprint(stack_b);
+	ft_lstprint(*stack_a);
+	ft_lstprint(stack_b);
 	free(chunk);
 }
 int	main(int argc, char **argv)

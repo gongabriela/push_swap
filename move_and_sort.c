@@ -121,6 +121,9 @@ void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list **tail_a, t_list 
 	else
 		ft_move_bottom_a(head_a, head_b, best_node);
 	*tail_a = ft_lstlast(head_a);
+	/*printf("\nAfter sending node to stack b: \n");
+	ft_lstprint(*head_a);
+	ft_lstprint(*head_b);*/
 	if (ft_lstsize(*head_b) == 1)
 		return ;
 	node_b = *head_b;
@@ -130,4 +133,8 @@ void	ft_move_and_sort(t_list **head_a, t_list **head_b, t_list **tail_a, t_list 
 		ft_sort_top_b(head_b, node_b);
 	else
 		ft_sort_bottom_b(head_b, node_b);
+	/*printf("\nAfter sorting the node in stack b: \n");
+	ft_lstprint(*head_a);
+	ft_lstprint(*head_b);*/
 }
+
