@@ -1,68 +1,13 @@
 
-void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
-{
-	int		median;
-	t_list *stack_b;
-
-	stack_b = NULL;
-	while(ft_lstsize(*stack_a) != 3)
-	{
-		median = get_median(*stack_a); //talvez tambem dividir a mediana em 2 ou 3 ou 4 partes? para passar os numeros mais proximos... nao sei. pq ja vimos que custa menos rodar a stack_a do que organizar na st
-		while (ft_lstsize(*stack_a) > current_size)
-		{
-			//printf("median: %d\n", median);
-			if (check_trio(stack_a, tail_a, &stack_b, median))
-				check_duo(stack_a, tail_a, &stack_b, median);
-			//check_best_node(stack_a, tail_a, &stack_b, median);
-			ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
-			ft_init_node_b(stack_b, ft_lstsize(stack_b));
-			//ft_lstprint(*stack_a);
-			//ft_lstprint(stack_b);
-			//printf("\n\n");
-		}
-	}
-	ft_sort_a(stack_a, tail_a);
-	//ft_lstprint(*stack_a);
-	//ft_lstprint(stack_b);
-	//printf("\n\n");
-	while (ft_lstsize(stack_b) > 0)
-		ft_pb(stack_a, &stack_b, 1);
-	ft_lstprint(*stack_a);
-	ft_lstprint(stack_b);
-}
-
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-	t_list	*tail_a;
-
-	stack_a = NULL;
-	ft_init_stack(argc, argv, &stack_a, &tail_a);
-	sorting_algorithm(&stack_a, &tail_a);
-	ft_free_lst(&stack_a);
-	return (0);
-}
-
-enquanto a stack_a != 3 (ela tem que ter 3 no final, se nao, nao vai funcionar. tem q achar uma forma de parar o codigo)
-
-	int i = 1;
-	median = get_median(*stack_a);
-	int bubble = median;
-	counter = get_numbers_bellow_median(*stack_a, median);
-
-	enquanto counter > 3
-	{
- 		bubble = median / ++i;
-		counter = get_numbers_bellow_median(*stack_a, bubble)
-	}
-	while (ft_lstsize(*stack_a) > 3 || i > 0)
-	{
-		while (counter > 0)
-			counter = get_numbers_bellow_median(*stack_a, bubble)
-			if (ft_check_trio(head_a, tail_a, head_b, bubble))
-				ft_check_duo(head_a, tail_a, head_b, bubble); --> como fazer isso parar se nao houver nenhum numero <= bubble?
-		bubble = median / --i;
-		counter = get_numbers_bellow_median(*stack_a, bubble)
-	}
-
 37 12 89 45 23 67 5 94 31 72 58 16 81 49 3
+
+vamos pegar na lista completa, e organiza-la.
+depois, vamos dividir em 3 pedacos: min, mid, e max.
+dps vamos pegar na stack a e iniciar o algoritmo.
+os numeros q fazerem parte do range min vao para o bottom_b.
+os numeros que fazerem parte do range mid vao para o top_b.
+os numeros que fazerem parte do range max vao para o bottom_a (ou simplesmente permanecer na stack_a, neste primeiro momento).
+
+iremos continuar dividindo ate os grupos min, mid e max tiverem 1 ou 2 numeros cada.
+vamos comecar a pelo primeiro max, depois o mid, e por fim o min.
+nao podemos fazer isso criando mais stacks, por isso precisamos guardar ponteiros que indiquem o inicio e o fim desses grupos!
