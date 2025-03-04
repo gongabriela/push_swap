@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	ft_init_stack(int argc, char **argv, t_list **stack_a, t_list **tail_a)
+void	ft_init_stack(int argc, char **argv, t_list **stack_a)
 {
 	t_list	*new_node;
 	char	**args;
@@ -27,59 +27,148 @@ void	ft_init_stack(int argc, char **argv, t_list **stack_a, t_list **tail_a)
 		else
 		{
 			new_node = ft_new_node(args[i]);
-			*tail_a = new_node;
 			if (new_node == NULL)
 				ft_error_init_stack(stack_a, args);
 			ft_lstadd_back(stack_a, new_node);
 		}
 		i++;
 	}
-	if (ft_lstsize(*stack_a) == 1 || ft_check_if_sorted(stack_a) || ft_check_duplicates(stack_a))
+	if (ft_lstsize(*stack_a) == 1 || ft_check_if_sorted(stack_a) || ft_check_duplicates(stack_a)) //sera que o check_duplicates tem que estar primeiro? para retornar erro...
 		ft_error_init_stack(stack_a, args);
 	ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
 	ft_free_args(args);
 }
-
-void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
+//find the targets of the nodes of stack_a
+//update total cost
+//pay attention to the rrr
+void	update_targets_of_stack_a(t_list *stack, t_list *target_stack)
 {
-	int		median;
-	int		current_size;
-	t_list *stack_b;
+	t_list	*temp;
+	t_list	*target;
 
-	stack_b = NULL;
-	while(ft_lstsize(*stack_a) != 3)
+	while (stack != NULL)
 	{
-		current_size = ft_lstsize(*stack_a) / 3;
-		median = get_median(*stack_a);
-		while (ft_lstsize(*stack_a) > current_size)
+		temp = target_stack;
+		target = NULL;
+		while (temp != NULL)
 		{
-			//printf("median: %d\n", median);
-			if (check_trio(stack_a, tail_a, &stack_b, median))
-				check_duo(stack_a, tail_a, &stack_b, median);
-			//check_best_node(stack_a, tail_a, &stack_b, median);
-			ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
-			ft_init_node_b(stack_b, ft_lstsize(stack_b));
-			//printf("\n\n");
+			if (temp->number < stack->number)
+			{
+				if (target == NULL)
+					target = temp;
+				else if (target->number < temp->number)
+					target = temp;
+			}
+			temp = temp->next;
 		}
+		if (target == NULL)
+			stack->target_node = NULL;
+		else
+			stack->cost = stack->cost + target->cost;
+			stack->target_node = target;
+		stack = stack->next;
 	}
-	ft_sort_a(stack_a, tail_a);
-	//ft_lstprint(*stack_a);
-	//ft_lstprint(stack_b);
-	//printf("\n\n");
-	while (ft_lstsize(stack_b) > 0)
-		ft_pb(stack_a, &stack_b, 1);
-	//ft_lstprint(*stack_a);
-	//ft_lstprint(stack_b);
+}
+//update cost of sending the node to the top of the stack
+void	update_cost(t_list *stack, int size)
+{
+	int	i;
+
+	i = 0;
+	while (++i <= (size + 1) / 2)
+	{
+		stack->index = i;
+		stack->direction = 't';
+		if (i == 1)
+			stack->cost = 1;
+		else
+			stack->cost = i + (i - 2);
+		stack = stack->next;
+	}
+	if (size % 2 != 0)
+		i = i - 1;
+	while (--i > 0)
+	{
+		stack->index = i;
+		stack->direction = 'b';
+		stack->cost = i + 1 + (i - 1);
+		stack = stack->next;
+	}
+}
+t_list	*find_cheaper_node(t_list *stack_a)
+{
+	t_list *temp_a;
+	t_list *node;
+
+	temp_a = stack_a;
+	node = stack_a;
+	while (temp_a != NULL)
+	{
+		if (temp_a->cost < node->cost)
+			node = temp_a;
+		temp_a = temp_a->next;
+	}
+	return (node);
+}
+
+void	push_and_sort_node(t_list **stack_a, t_list **stack_b, t_list *node)
+{
+	int	counter;
+
+	if (!(*stack_b))
+	{
+		ft_pb(stack_a, stack_b, 1);
+		if (ft_lstsize(*stack_a) > 3)
+			ft_pb(stack_a, stack_b, 1);
+		return;
+	}
+}
+
+void	sort_node_in_b(t_list **stack_b)
+{
+	if (ft_lstsize(*stack_b) == 2)
+		return ;
+}
+
+void	sorting_algorithm(t_list **stack_a, t_list **stack_b)
+{
+	t_list	*node;
+
+	while (ft_lstsize(*stack_a) > 3)
+	{
+		update_cost(*stack_a, ft_lstsize(*stack_a));
+		update_cost(*stack_b, ft_lstsize(*stack_b));
+		update_targets_of_stack_a(*stack_a, *stack_b);
+		node = find_cheaper_node(*stack_a);
+	}
+	//sort_3();
+	while (ft_lstsize(*stack_b) > 0)
+	{
+		update_cost(*stack_a, ft_lstsize(*stack_a));
+		update_cost(*stack_b, ft_lstsize(*stack_b));
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
-	t_list	*tail_a;
+	t_list	*stack_b;
 
 	stack_a = NULL;
-	ft_init_stack(argc, argv, &stack_a, &tail_a);
-	sorting_algorithm(&stack_a, &tail_a);
+	stack_b = NULL;
+
+	ft_init_stack(argc, argv, &stack_a);
+
+	//if (ft_lstsize == 2)
+		//sort_2();
+	//else if (ft_lstsize == 3)
+		//sort_3();
+	//else
+	sorting_algorithm(&stack_a, &stack_b);
+
 	ft_free_lst(&stack_a);
+
 	return (0);
 }
+
+//algoritmo antigo
