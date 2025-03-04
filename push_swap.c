@@ -43,16 +43,16 @@ void	ft_init_stack(int argc, char **argv, t_list **stack_a, t_list **tail_a)
 void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 {
 	int		median;
-	int		current_size;
+	//int		current_size;
 	t_list *stack_b;
 
 	stack_b = NULL;
 	while(ft_lstsize(*stack_a) != 3)
 	{
-		current_size = ft_lstsize(*stack_a) / 3;
-		median = get_median(*stack_a);
-		while (ft_lstsize(*stack_a) > current_size)
+		//current_size = ft_lstsize(*stack_a) / 2;
+		while (ft_lstsize(*stack_a) > 3)
 		{
+			median = get_median(*stack_a);
 			//printf("median: %d\n", median);
 			if (check_trio(stack_a, tail_a, &stack_b, median))
 				check_duo(stack_a, tail_a, &stack_b, median);
@@ -68,8 +68,8 @@ void	sorting_algorithm(t_list **stack_a, t_list **tail_a)
 	//printf("\n\n");
 	while (ft_lstsize(stack_b) > 0)
 		ft_pb(stack_a, &stack_b, 1);
-	//ft_lstprint(*stack_a);
-	//ft_lstprint(stack_b);
+	ft_lstprint(*stack_a);
+	ft_lstprint(stack_b);
 }
 
 int	main(int argc, char **argv)
