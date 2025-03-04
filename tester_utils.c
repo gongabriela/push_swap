@@ -135,3 +135,43 @@ void	ft_lstprint(t_list *head)
 	ft_lstprint(*stack_a);
 	ft_lstprint(stack_b);
 	printf("\n\n");*/
+
+/*t_list *temp = *stack_a;
+	while (temp != NULL)
+	{
+		if (temp->previous != NULL)
+			printf("previous: %d\n", temp->previous->number);
+		printf("index: %d\n", temp->index);
+		printf("number: %d\n", temp->number);
+		printf("direction: %c\n", temp->direction);
+		printf("target: %d\n", temp->target_node->number);
+		printf("cost: %d\n", temp->cost);
+		if (temp->next != NULL)
+			printf("next: %d\n\n", temp->next->number);
+		temp = temp->next;
+	}
+	printf("\n\n");
+	temp = *stack_b;
+	while (temp != NULL)
+	{
+		if (temp->previous != NULL)
+			printf("previous: %d\n", temp->previous->number);
+		printf("index: %d\n", temp->index);
+		printf("number: %d\n", temp->number);
+		printf("direction: %c\n", temp->direction);
+		//printf("target: %d\n", temp->target_node->number);
+		printf("cost: %d\n", temp->cost);
+		if (temp->next != NULL)
+			printf("next: %d\n\n", temp->next->number);
+		temp = temp->next;
+	}
+	printf("\n\ncheaper node:\n");
+	if (node->previous != NULL)
+		printf("previous: %d\n", node->previous->number);
+	printf("index: %d\n", node->index);
+	printf("number: %d\n", node->number);
+	printf("direction: %c\n", node->direction);
+	 printf("target: %d\n", node->target_node->number);
+	printf("cost: %d\n", node->cost);
+	if (node->next != NULL)
+		printf("next: %d\n\n", node->next->number);*/

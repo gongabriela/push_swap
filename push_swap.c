@@ -35,118 +35,46 @@ void	ft_init_stack(int argc, char **argv, t_list **stack_a)
 	}
 	if (ft_lstsize(*stack_a) == 1 || ft_check_if_sorted(stack_a) || ft_check_duplicates(stack_a)) //sera que o check_duplicates tem que estar primeiro? para retornar erro...
 		ft_error_init_stack(stack_a, args);
-	ft_init_node_a(*stack_a, ft_lstsize(*stack_a));
 	ft_free_args(args);
 }
-//find the targets of the nodes of stack_a
-//update total cost
-//pay attention to the rrr
-void	update_targets_of_stack_a(t_list *stack, t_list *target_stack)
+
+void	first_push(t_list **stack_a, t_list **stack_b)
 {
-	t_list	*temp;
-	t_list	*target;
-
-	while (stack != NULL)
-	{
-		temp = target_stack;
-		target = NULL;
-		while (temp != NULL)
-		{
-			if (temp->number < stack->number)
-			{
-				if (target == NULL)
-					target = temp;
-				else if (target->number < temp->number)
-					target = temp;
-			}
-			temp = temp->next;
-		}
-		if (target == NULL)
-			stack->target_node = NULL;
-		else
-			stack->cost = stack->cost + target->cost;
-			stack->target_node = target;
-		stack = stack->next;
-	}
+	ft_pa_pb(stack_a, stack_b, 1);
+	if (ft_lstsize(*stack_a) > 3)
+		ft_pa_pb(stack_a, stack_b, 1);
 }
-//update cost of sending the node to the top of the stack
-void	update_cost(t_list *stack, int size)
-{
-	int	i;
-
-	i = 0;
-	while (++i <= (size + 1) / 2)
-	{
-		stack->index = i;
-		stack->direction = 't';
-		if (i == 1)
-			stack->cost = 1;
-		else
-			stack->cost = i + (i - 2);
-		stack = stack->next;
-	}
-	if (size % 2 != 0)
-		i = i - 1;
-	while (--i > 0)
-	{
-		stack->index = i;
-		stack->direction = 'b';
-		stack->cost = i + 1 + (i - 1);
-		stack = stack->next;
-	}
-}
-t_list	*find_cheaper_node(t_list *stack_a)
-{
-	t_list *temp_a;
-	t_list *node;
-
-	temp_a = stack_a;
-	node = stack_a;
-	while (temp_a != NULL)
-	{
-		if (temp_a->cost < node->cost)
-			node = temp_a;
-		temp_a = temp_a->next;
-	}
-	return (node);
-}
-
-void	push_and_sort_node(t_list **stack_a, t_list **stack_b, t_list *node)
-{
-	int	counter;
-
-	if (!(*stack_b))
-	{
-		ft_pb(stack_a, stack_b, 1);
-		if (ft_lstsize(*stack_a) > 3)
-			ft_pb(stack_a, stack_b, 1);
-		return;
-	}
-}
-
-void	sort_node_in_b(t_list **stack_b)
-{
-	if (ft_lstsize(*stack_b) == 2)
-		return ;
-}
-
 void	sorting_algorithm(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*node;
 
+	first_push(stack_a, stack_b);
 	while (ft_lstsize(*stack_a) > 3)
 	{
 		update_cost(*stack_a, ft_lstsize(*stack_a));
 		update_cost(*stack_b, ft_lstsize(*stack_b));
 		update_targets_of_stack_a(*stack_a, *stack_b);
 		node = find_cheaper_node(*stack_a);
+		node_to_top_b(stack_b, node, 1);
+		node_to_top_a(stack_a, node, 0);
+		ft_pa_pb(stack_a, stack_b, 1);
 	}
-	//sort_3();
+	sort_3(stack_a); //nao ta funcionando
 	while (ft_lstsize(*stack_b) > 0)
 	{
 		update_cost(*stack_a, ft_lstsize(*stack_a));
 		update_cost(*stack_b, ft_lstsize(*stack_b));
+		update_targets_of_stack_b(*stack_a, *stack_b);
+		node = *stack_b;
+		node_to_top_a(stack_a, node, 1);
+		node_to_top_b(stack_b, node, 0);
+		ft_pa_pb(stack_b, stack_a, 0);
 	}
+	update_cost(*stack_a, ft_lstsize(*stack_a));
+	//node = 	min_value(*stack_a);
+	//node_to_top_a(stack_a, node, 0);
+	ft_lstprint(*stack_a);
+	ft_lstprint(*stack_b);
 }
 
 int	main(int argc, char **argv)
