@@ -19,7 +19,7 @@ void	ft_init_node_a_bottom(t_list *new_node, int i)
 		new_node->position = i;
 		new_node->direction = 'b';
 		new_node->total_cost = -2;
-		new_node->cost = i + 1 + (i - 1);
+		new_node->cost = i + 1;
 		new_node = new_node->next;
 		i--;
 	}
@@ -36,10 +36,7 @@ void	ft_init_node_a(t_list *new_node, int size)
 		new_node->position = i;
 		new_node->direction = 't';
 		new_node->total_cost = -2;
-		if (i == 1)
-			new_node->cost = 1;
-		else
-			new_node->cost = i + (i - 2);
+		new_node->cost = i;
 		i++;
 		new_node = new_node->next;
 	}
