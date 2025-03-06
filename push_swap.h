@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:35:58 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/03/06 12:10:13 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:46:17 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_list
 	struct s_list	*previous;
 	int				index;
 	char			direction;
-	int				number;
+	long			number;
 	int				cost;
 	struct s_list	*target_node;
 	struct s_list	*next;

@@ -95,7 +95,6 @@ int	main(int argc, char **argv)
 			ft_pa_pb(&stack_a, &stack_b, 1);
 		sorting_algorithm(&stack_a, &stack_b);
 	}
-	ft_lstprint(stack_a);
 	ft_free_lst(&stack_a);
 	return (0);
 }

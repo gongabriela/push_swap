@@ -42,8 +42,8 @@ char	**ft_divide_args(int argc, char **argv)
 
 int	ft_check_args(char *char_args)
 {
-	int	nbr;
-	int	i;
+	long	nbr;
+	int		i;
 
 	i = 0;
 	if (char_args[i] == '-')
@@ -54,10 +54,10 @@ int	ft_check_args(char *char_args)
 			return (-1);
 		i++;
 	}
-	if (ft_strlen(char_args) > 10)
+	if (ft_strlen(char_args) > 11)
 		return (-1);
 	nbr = ft_atol(char_args);
-	if (nbr > -2147483648 && nbr < 2147483647)
+	if (nbr >= -2147483648 && nbr <= 2147483647)
 		i++;
 	else
 		return (1);
