@@ -44,8 +44,8 @@ void	ft_lstadd_back(t_list **stack_a, t_list *new_node)
 
 int	ft_lstsize(t_list *head)
 {
-	t_list *temp;
-	int	i;
+	t_list	*temp;
+	int		i;
 
 	temp = head;
 	if (!temp)
@@ -59,3 +59,17 @@ int	ft_lstsize(t_list *head)
 	return (i);
 }
 
+void	ft_lstprint(t_list *head)
+{
+	t_list	*temp;
+	int		value;
+
+	temp = head;
+	while (temp != NULL)
+	{
+		value = temp->number;
+		ft_printf("%d ", value);
+		temp = temp->next;
+	}
+	ft_printf("\n");
+}

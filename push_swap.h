@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:35:58 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/03/04 16:33:01 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:10:13 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_init_stack(int argc, char **argv, t_list **stack_a);
 char	**ft_divide_args(int argc, char **argv);
 int		ft_check_args(char *char_args);
 int		ft_check_duplicates(t_list **stack_a);
-int		ft_check_if_sorted(t_list **stack_a);
+int		ft_check_if_sorted(t_list *stack_a);
 t_list	*ft_new_node(char	*args);
 void	ft_lstadd_back(t_list **stack_a, t_list *new_node);
 void	ft_lstprint(t_list *head);
@@ -48,7 +48,7 @@ int		ft_lstsize(t_list *head);
 //movements:
 void	ft_print_mov(int index, char *mov);
 void	ft_sa_sb(t_list **head, int flag);
-void 	ft_pa_pb(t_list **stack_a, t_list **stack_b, int flag);
+void	ft_pa_pb(t_list **stack_a, t_list **stack_b, int flag);
 void	ft_ra_rb(t_list **stack, int flag);
 void	ft_rra_rrb(t_list **stack, int flag);
 

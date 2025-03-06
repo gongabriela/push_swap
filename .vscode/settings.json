@@ -1,5 +1,6 @@
 {
 	"files.associations": {
 		"push_swap.h": "c"
-	}
+	},
+	"cmake.sourceDirectory": "/wsl.localhost/Ubuntu/home/gongabriela/push_swap/push_swap_visualizer/build/_deps/catch2-src"
 }

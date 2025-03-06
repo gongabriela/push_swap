@@ -39,6 +39,7 @@ char	**ft_divide_args(int argc, char **argv)
 	}
 	return (char_args);
 }
+
 int	ft_check_args(char *char_args)
 {
 	int	nbr;
@@ -83,13 +84,13 @@ int	ft_check_duplicates(t_list **stack_a)
 	return (0);
 }
 
-int	ft_check_if_sorted(t_list **stack_a)
+int	ft_check_if_sorted(t_list *stack_a)
 {
 	t_list	*next;
 	t_list	*temp;
 
-	next = (*stack_a)->next;
-	temp = *stack_a;
+	next = stack_a->next;
+	temp = stack_a;
 	while (next != NULL)
 	{
 		if (next->number < temp->number)
