@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:44:30 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/03/06 12:16:32 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:48:58 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,32 @@ void	update_cost(t_list *stack, int size)
 	}
 }
 
-void	update_targets_of_stack_a(t_list *stack_a, t_list *stack_b)
+void	update_cost_rr_rrr(t_list *node, t_list *target)
 {
-	t_list	*temp;
-	t_list	*target;
+	int	counter;
+	int	i;
 
-	while (stack_a != NULL)
+	if ((node->direction == 't' && target->direction == 't'
+			&& node->index != 1 && target->index != 1)
+		|| (node->direction == 'b' && target->direction == 'b'))
 	{
-		temp = stack_b;
-		target = NULL;
-		while (temp != NULL)
+		if (node->index <= target->index)
 		{
-			if (temp->number < stack_a->number)
-			{
-				if (target == NULL)
-					target = temp;
-				else if (target->number < temp->number)
-					target = temp;
-			}
-			temp = temp->next;
+			counter = node->index;
+			i = target->index - node->index;
 		}
-		if (target == NULL)
-			target = max_value(stack_b);
-		stack_a->cost = stack_a->cost + target->cost;
-		stack_a->target_node = target;
-		stack_a = stack_a->next;
+		else
+		{
+			counter = target->index;
+			i = node->index - target->index;
+		}
+		if (node->direction == 't' && target->direction == 't'
+			&& node->index != 1 && target->index != 1)
+			counter = counter - 1;
+		node->cost = counter + i;
 	}
+	else
+		node->cost = node->cost + target->cost;
 }
 
 void	node_to_top_b(t_list **stack_b, t_list *node, int flag)
@@ -111,30 +111,30 @@ void	node_to_top_a(t_list **stack_a, t_list *node, int flag)
 	}
 }
 
-void	update_targets_of_stack_b(t_list *stack_a, t_list *stack_b)
+void	node_to_top(t_list **stack_a, t_list **stack_b, t_list *node, int flag)
 {
-	t_list	*temp;
-	t_list	*target;
+	int	counter;
 
-	while (stack_b != NULL)
+	if (node->index <= node->target_node->index)
+		counter = node->index;
+	else
+		counter = node->target_node->index;
+	if (node->direction == 't' && node->target_node->direction == 't'
+		&& node->index != 1 && node->target_node->index != 1)
 	{
-		temp = stack_a;
-		target = NULL;
-		while (temp != NULL)
-		{
-			if (temp->number > stack_b->number)
-			{
-				if (target == NULL)
-					target = temp;
-				else if (target->number > temp->number)
-					target = temp;
-			}
-			temp = temp->next;
-		}
-		if (target == NULL)
-			target = min_value(stack_a);
-		stack_b->cost = stack_b->cost + target->cost;
-		stack_b->target_node = target;
-		stack_b = stack_b->next;
+		counter = counter - 1;
+		while (counter-- > 0)
+			ft_rr(stack_a, stack_b);
 	}
+	else if (node->direction == 'b' && node->target_node->direction == 'b')
+		while (counter-- > 0)
+			ft_rrr(stack_a, stack_b);
+	update_cost(*stack_a, ft_lstsize(*stack_a));
+	update_cost(*stack_b, ft_lstsize(*stack_b));
+	if (flag == 0)
+		counter = 1;
+	else
+		counter = 0;
+	node_to_top_a(stack_a, node, flag);
+	node_to_top_b(stack_b, node, counter);
 }

@@ -55,3 +55,59 @@ t_list	*find_cheaper_node(t_list *stack_a)
 	}
 	return (node);
 }
+
+void	update_targets_of_stack_a(t_list *stack_a, t_list *stack_b)
+{
+	t_list	*temp;
+	t_list	*target;
+
+	while (stack_a != NULL)
+	{
+		temp = stack_b;
+		target = NULL;
+		while (temp != NULL)
+		{
+			if (temp->number < stack_a->number)
+			{
+				if (target == NULL)
+					target = temp;
+				else if (target->number < temp->number)
+					target = temp;
+			}
+			temp = temp->next;
+		}
+		if (target == NULL)
+			target = max_value(stack_b);
+		update_cost_rr_rrr(stack_a, target);
+		stack_a->target_node = target;
+		stack_a = stack_a->next;
+	}
+}
+
+void	update_targets_of_stack_b(t_list *stack_a, t_list *stack_b)
+{
+	t_list	*temp;
+	t_list	*target;
+
+	while (stack_b != NULL)
+	{
+		temp = stack_a;
+		target = NULL;
+		while (temp != NULL)
+		{
+			if (temp->number > stack_b->number)
+			{
+				if (target == NULL)
+					target = temp;
+				else if (target->number > temp->number)
+					target = temp;
+			}
+			temp = temp->next;
+		}
+		if (target == NULL)
+			target = min_value(stack_a);
+		update_cost_rr_rrr(stack_b, target);
+		stack_b->target_node = target;
+		stack_b = stack_b->next;
+	}
+}

@@ -53,13 +53,15 @@ void	sort_3(t_list **stack_a)
 
 void	sorting_algorithm(t_list **stack_a, t_list **stack_b)
 {
+	t_list	*node;
+
 	while (ft_lstsize(*stack_a) > 3)
 	{
 		update_cost(*stack_a, ft_lstsize(*stack_a));
 		update_cost(*stack_b, ft_lstsize(*stack_b));
 		update_targets_of_stack_a(*stack_a, *stack_b);
-		node_to_top_b(stack_b, find_cheaper_node(*stack_a), 1);
-		node_to_top_a(stack_a, find_cheaper_node(*stack_a), 0);
+		node = find_cheaper_node(*stack_a);
+		node_to_top(stack_a, stack_b, node, 0);
 		ft_pa_pb(stack_a, stack_b, 1);
 	}
 	sort_3(stack_a);
@@ -68,8 +70,8 @@ void	sorting_algorithm(t_list **stack_a, t_list **stack_b)
 		update_cost(*stack_a, ft_lstsize(*stack_a));
 		update_cost(*stack_b, ft_lstsize(*stack_b));
 		update_targets_of_stack_b(*stack_a, *stack_b);
-		node_to_top_a(stack_a, find_cheaper_node(*stack_b), 1);
-		node_to_top_b(stack_b, find_cheaper_node(*stack_b), 0);
+		node = find_cheaper_node(*stack_b);
+		node_to_top(stack_a, stack_b, node, 1);
 		ft_pa_pb(stack_b, stack_a, 0);
 	}
 	update_cost(*stack_a, ft_lstsize(*stack_a));
@@ -95,6 +97,7 @@ int	main(int argc, char **argv)
 			ft_pa_pb(&stack_a, &stack_b, 1);
 		sorting_algorithm(&stack_a, &stack_b);
 	}
+	ft_lstprint(stack_a);
 	ft_free_lst(&stack_a);
 	return (0);
 }
