@@ -85,6 +85,8 @@ int	main(int argc, char **argv)
 
 	stack_a = NULL;
 	stack_b = NULL;
+	if (argc < 2)
+		return (0);
 	ft_init_stack(argc, argv, &stack_a);
 	if (ft_lstsize(stack_a) == 2 && !ft_check_if_sorted(stack_a))
 		ft_sa_sb(&stack_a, 0);
@@ -97,7 +99,8 @@ int	main(int argc, char **argv)
 			ft_pa_pb(&stack_a, &stack_b, 1);
 		sorting_algorithm(&stack_a, &stack_b);
 	}
-	ft_lstprint(stack_a);
+	//ft_lstprint(stack_a);
+	//ft_lstprint(stack_b);
 	ft_free_lst(&stack_a);
 	return (0);
 }

@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movements_2.c                                      :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 14:43:20 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/03/10 14:43:20 by ggoncalv         ###   ########.fr       */
+/*   Created: 2025/03/11 18:53:07 by ggoncalv          #+#    #+#             */
+/*   Updated: 2025/03/11 18:53:07 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef CHECKER_H
+# define CHECKER_H
+# include "push_swap.h"
 
-void	ft_rrr(t_list **stack_a, t_list **stack_b, int flag)
-{
-	ft_rra_rrb(stack_a, -1);
-	ft_rra_rrb(stack_b, -1);
-	if (flag > 0)
-		write(1, "rrr\n", 4);
-}
+void	perform_movements(t_list **stack_a, t_list **stack_b, char *mov);
 
-void	ft_rr(t_list **stack_a, t_list **stack_b, int flag)
-{
-	ft_ra_rb(stack_a, -1);
-	ft_ra_rb(stack_b, -1);
-	if (flag > 0)
-		write(1, "rr\n", 3);
-}
+#endif

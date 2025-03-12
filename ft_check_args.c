@@ -12,6 +12,16 @@
 
 #include "push_swap.h"
 
+static void	check_empty_string(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while(argv[1][i] != '\0' && argv[1][i] == ' ')
+		i++;
+	if (argv[1][i] == '\0')
+		exit(EXIT_FAILURE);
+}
 char	**ft_divide_args(int argc, char **argv)
 {
 	char	**char_args;
@@ -22,6 +32,7 @@ char	**ft_divide_args(int argc, char **argv)
 		ft_error();
 	if (argc == 2)
 	{
+		check_empty_string(argv);
 		char_args = ft_split(argv[1], ' ');
 		if (char_args == NULL)
 			ft_error();
@@ -42,7 +53,6 @@ char	**ft_divide_args(int argc, char **argv)
 
 int	ft_check_args(char *char_args)
 {
-	long	nbr;
 	int		i;
 
 	i = 0;
@@ -56,8 +66,7 @@ int	ft_check_args(char *char_args)
 	}
 	if (ft_strlen(char_args) > 11)
 		return (-1);
-	nbr = ft_atol(char_args);
-	if (nbr >= -2147483648 && nbr <= 2147483647)
+	if (ft_atol(char_args) >= -2147483648 && ft_atol(char_args) <= 2147483647)
 		i++;
 	else
 		return (1);

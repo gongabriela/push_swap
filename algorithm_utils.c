@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 13:44:30 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/03/10 14:48:58 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/03/11 19:09:55 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,11 @@ void	node_to_top(t_list **stack_a, t_list **stack_b, t_list *node, int flag)
 	{
 		counter = counter - 1;
 		while (counter-- > 0)
-			ft_rr(stack_a, stack_b);
+			ft_rr(stack_a, stack_b, 1);
 	}
 	else if (node->direction == 'b' && node->target_node->direction == 'b')
 		while (counter-- > 0)
-			ft_rrr(stack_a, stack_b);
+			ft_rrr(stack_a, stack_b, 1);
 	update_cost(*stack_a, ft_lstsize(*stack_a));
 	update_cost(*stack_b, ft_lstsize(*stack_b));
 	if (flag == 0)
