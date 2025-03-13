@@ -17,11 +17,12 @@ static void	check_empty_string(char **argv)
 	int	i;
 
 	i = 0;
-	while(argv[1][i] != '\0' && argv[1][i] == ' ')
+	while (argv[1][i] != '\0' && argv[1][i] == ' ')
 		i++;
 	if (argv[1][i] == '\0')
 		exit(EXIT_FAILURE);
 }
+
 char	**ft_divide_args(int argc, char **argv)
 {
 	char	**char_args;

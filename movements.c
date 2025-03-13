@@ -64,6 +64,8 @@ void	ft_sa_sb(t_list **head, int flag)
 
 	node_3 = NULL;
 	node_1 = *head;
+	if (ft_lstsize(*head) <= 1)
+		return ;
 	node_2 = (*head)->next;
 	if (ft_lstsize(*head) > 2)
 		node_3 = node_2->next;
@@ -88,6 +90,8 @@ void	ft_ra_rb(t_list **stack, int flag)
 
 	first = *stack;
 	last = *stack;
+	if (ft_lstsize(*stack) <= 1)
+		return ;
 	while (last->next != NULL)
 		last = last->next;
 	*stack = first->next;
@@ -106,6 +110,8 @@ void	ft_rra_rrb(t_list **stack, int flag)
 
 	first = *stack;
 	last = *stack;
+	if (ft_lstsize(*stack) <= 1)
+		return ;
 	while (last->next != NULL)
 		last = last->next;
 	new_last = last->previous;

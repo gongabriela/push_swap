@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:35:58 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/03/11 19:09:40 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:48:23 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	ft_ra_rb(t_list **stack, int flag);
 void	ft_rra_rrb(t_list **stack, int flag);
 void	ft_rrr(t_list **stack_a, t_list **stack_b, int flag);
 void	ft_rr(t_list **stack_a, t_list **stack_b, int flag);
+void	ft_ss(t_list **stack_a, t_list **stack_b);
 
 //PARTE II - algoritmo para stack > 3:
 void	sorting_algorithm(t_list **stack_a, t_list **stack_b);

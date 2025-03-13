@@ -38,7 +38,7 @@ void	ft_init_stack(int argc, char **argv, t_list **stack_a)
 	ft_free_args(args);
 }
 
-void	perform_movements(t_list **stack_a, t_list **stack_b, char *mov)
+int	perform_movements(t_list **stack_a, t_list **stack_b, char *mov)
 {
 	if (!ft_strncmp("pa\n", mov, ft_strlen(mov)))
 		ft_pa_pb(stack_b, stack_a, -1);
@@ -60,12 +60,17 @@ void	perform_movements(t_list **stack_a, t_list **stack_b, char *mov)
 		ft_sa_sb(stack_a, -1);
 	else if (!ft_strncmp("sb\n", mov, ft_strlen(mov)))
 		ft_sa_sb(stack_b, -1);
+	else if (!ft_strncmp("ss\n", mov, ft_strlen(mov)))
+		ft_ss(stack_a, stack_b);
+	else
+		return (0);
+	return (1);
 }
 
 int	main(int argc, char **argv)
 {
-	t_list *stack_a;
-	t_list *stack_b;
+	t_list	*stack_a;
+	t_list	*stack_b;
 	char	*mov;
 
 	stack_a = NULL;
@@ -74,15 +79,18 @@ int	main(int argc, char **argv)
 		return (0);
 	ft_init_stack(argc, argv, &stack_a);
 	if (ft_check_if_sorted(stack_a))
-		return(ft_free_lst(&stack_a), 0);
+		return (ft_free_lst(&stack_a), write(1, "OK\n", 3));
 	mov = get_next_line(0);
 	while (mov != NULL)
 	{
-		perform_movements(&stack_a, &stack_b, mov);
+		if (!perform_movements(&stack_a, &stack_b, mov))
+			return (free(mov), ft_free_lst(&stack_a), ft_free_lst(&stack_b),
+				write(2, "Error\n", 6));
 		free(mov);
 		mov = get_next_line(0);
 	}
 	if (ft_check_if_sorted(stack_a) && ft_lstsize(stack_b) == 0)
-		return(free(mov), ft_free_lst(&stack_a), write(1, "OK\n", 3));
-	return (free(mov), ft_free_lst(&stack_a), ft_free_lst(&stack_b), write(1, "KO\n", 3));
+		return (free(mov), ft_free_lst(&stack_a), write(1, "OK\n", 3));
+	return (free(mov), ft_free_lst(&stack_a), ft_free_lst(&stack_b),
+		write(1, "KO\n", 3));
 }

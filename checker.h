@@ -14,6 +14,6 @@
 # define CHECKER_H
 # include "push_swap.h"
 
-void	perform_movements(t_list **stack_a, t_list **stack_b, char *mov);
+int	perform_movements(t_list **stack_a, t_list **stack_b, char *mov);
 
 #endif
