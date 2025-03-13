@@ -20,7 +20,7 @@ static void	check_empty_string(char **argv)
 	while (argv[1][i] != '\0' && argv[1][i] == ' ')
 		i++;
 	if (argv[1][i] == '\0')
-		exit(EXIT_FAILURE);
+		ft_error();
 }
 
 char	**ft_divide_args(int argc, char **argv)
