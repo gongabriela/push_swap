@@ -59,6 +59,8 @@ int	ft_check_args(char *char_args)
 	i = 0;
 	if (char_args[i] == '-')
 		i++;
+	if (i == 1 && char_args[i] == '\0')
+		return (-1);
 	while (char_args[i])
 	{
 		if (!ft_isdigit(char_args[i]))
