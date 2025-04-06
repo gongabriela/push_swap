@@ -29,8 +29,6 @@ char	**ft_divide_args(int argc, char **argv)
 	int		i;
 
 	i = 0;
-	if (argc < 2)
-		ft_error();
 	if (argc == 2)
 	{
 		check_empty_string(argv);
@@ -57,7 +55,7 @@ int	ft_check_args(char *char_args)
 	int		i;
 
 	i = 0;
-	if (char_args[i] == '-')
+	if (char_args[i] == '-' || char_args[i] == '+')
 		i++;
 	if (i == 1 && char_args[i] == '\0')
 		return (-1);

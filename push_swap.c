@@ -102,5 +102,3 @@ int	main(int argc, char **argv)
 	ft_free_lst(&stack_a);
 	return (0);
 }
-
-//algoritmo antigo

@@ -6,7 +6,7 @@
 /*   By: ggoncalv <ggoncalv@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 10:35:58 by ggoncalv          #+#    #+#             */
-/*   Updated: 2025/03/13 09:48:23 by ggoncalv         ###   ########.fr       */
+/*   Updated: 2025/04/06 14:39:50 by ggoncalv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_free_lst(t_list **head);
 void	ft_free_args(char **args);
 void	ft_error_init_stack(t_list **stack_a, char **args);
 
-//PARTE I - funcoes de iniciar a stack:
+//funcoes de iniciar a stack:
 void	ft_init_stack(int argc, char **argv, t_list **stack_a);
 char	**ft_divide_args(int argc, char **argv);
 int		ft_check_args(char *char_args);
@@ -42,7 +42,6 @@ int		ft_check_duplicates(t_list **stack_a);
 int		ft_check_if_sorted(t_list *stack_a);
 t_list	*ft_new_node(char	*args);
 void	ft_lstadd_back(t_list **stack_a, t_list *new_node);
-void	ft_lstprint(t_list *head);
 int		ft_lstsize(t_list *head);
 
 //movements:
@@ -55,7 +54,7 @@ void	ft_rrr(t_list **stack_a, t_list **stack_b, int flag);
 void	ft_rr(t_list **stack_a, t_list **stack_b, int flag);
 void	ft_ss(t_list **stack_a, t_list **stack_b);
 
-//PARTE II - algoritmo para stack > 3:
+//algoritmo:
 void	sorting_algorithm(t_list **stack_a, t_list **stack_b);
 void	update_cost(t_list *stack, int size);
 void	update_cost_rr_rrr(t_list *node, t_list *target);
